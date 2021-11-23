@@ -1,30 +1,56 @@
 <div class="container p-4">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body">
-                    <form action="/links/editbook/{{editbook.idLibro}}" method="POST">
-                        <div class="form-group">
-                            <input type="text" value="{{editbook.titulo}}" name="titulo" placeholder="Título" autofocus>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" value="{{editbook.descripcion}}" name="descripcion" placeholder="Descripción" >
-                        </div>
-                        <div class="form-group">
-                            <input type="number" value="{{editbook.stock}}"  name="stock" placeholder="Cantidad">
-                        </div>
-                        <div class="form-group">
-                            <input type="number" value="{{editbook.precio}}"  name="precio" placeholder="Precio">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" value="{{editbook.autor}}"  name="autor" placeholder="Autor">
-                        </div>                        
-                        <button>
-                            Actualizar
-                        </button>
-                    </form>
-                </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <form action="/links/editbook/{{editbook.idLibro}}" method="POST">
+            <div class="form-group">
+              <input
+                type="text"
+                value="{{editbook.titulo}}"
+                name="titulo"
+                placeholder="Título"
+                autofocus
+              />
             </div>
+            <div class="form-group">
+              <input
+                type="text"
+                value="{{editbook.descripcion}}"
+                name="descripcion"
+                placeholder="Descripción"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="number"
+                value="{{editbook.stock}}"
+                name="stock"
+                placeholder="Cantidad"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="number"
+                value="{{editbook.precio}}"
+                name="precio"
+                placeholder="Precio"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="text"
+                value="{{editbook.autor}}"
+                name="autor"
+                placeholder="Autor"
+              />
+            </div>
+            <button>
+              Actualizar
+            </button>
+          </form>
         </div>
+      </div>
     </div>
+  </div>
 </div>

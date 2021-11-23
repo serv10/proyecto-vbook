@@ -1,0 +1,143 @@
+.Contenedor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e1e8e9;
+  height: 562px;
+}
+
+.DivCont {
+  background-color: #e9e9e9;
+  display: flex;
+  align-items: center;
+  height: 500px;
+  width: 80%;
+}
+
+.DivImg {
+  display: flex;
+  width: 60%;
+  justify-content: center;
+  align-items: center;
+}
+
+.DivImg figure {
+  width: 70%;
+}
+.DivImg figure img {
+  width: 100%;
+  filter: brightness(1.1);
+  mix-blend-mode: multiply;
+}
+
+.Formulario {
+  width: 40%;
+}
+
+.Formulario h1 {
+  font-style: normal;
+  font-weight: 900;
+  font-size: 2.5rem;
+  line-height: 47px;
+  color: rgba(0, 0, 0, 0.79);
+}
+
+.GrupoInput {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.Label {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.2rem;
+  line-height: 26px;
+  color: rgba(0, 0, 0, 0.79);
+  margin-top: 20px;
+}
+
+.Input {
+  margin-top: 10px;
+  min-height: 35px;
+  padding-left: 5px;
+  padding-right: 5px;
+
+  line-height: 20px;
+  width: 80%;
+
+  font-size: 0.9rem;
+}
+
+.Input:focus {
+  border: 2px solid rgba(0, 0, 0, 0.79);
+  outline: none;
+}
+
+.OlvidarContra {
+  display: flex;
+  width: 80%;
+}
+
+.OlvidarContra button {
+  background: #e9e9e9;
+  margin-left: auto;
+  font-size: 0.9rem;
+  line-height: 20px;
+  color: rgba(0, 0, 0, 0.69);
+  margin-top: 6px;
+  border: transparent;
+  cursor: pointer;
+}
+
+.GrupoBoton {
+  display: flex;
+  justify-content: center;
+  width: 80%;
+  margin: 37px 0;
+}
+
+.Boton {
+  background-color: #36a7f7;
+  border-radius: 20px;
+  height: 40px;
+  cursor: pointer;
+  border: none;
+  width: 75%;
+  font-weight: 900;
+  font-size: 1.25rem;
+  line-height: 23px;
+
+  color: white;
+}
+
+.IrLogeoRegistrar {
+  font-size: 1.063rem;
+  font-weight: 900;
+  line-height: 20px;
+  color: rgba(0, 0, 0, 0.79);
+}
+
+.Enlace {
+  font-weight: 900;
+  font-size: 17px;
+  line-height: 20px;
+  border: transparent;
+  cursor: pointer;
+  margin-left: 5px;
+  text-decoration: none;
+  color: #000;
+}
+
+.GrupoComponenteGrupo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 25px;
+}
+.DivForm {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+  padding-left: 15px;
+}

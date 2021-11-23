@@ -1,51 +1,215 @@
-<div class="container p-4">
-    <div class="row">
-        <div class="col-md-4 mx-auto">
-            <div class="card text-center">
-                <div class="card-header">
-                    <h3>Registro</h3>
-                </div>
-                <div class="card-body">
-                        <form action="/registro" method="post">
-                            <div class="form-group">
-                                <input type="number" maxlength="8" name="dni" placeholder="DNI" class="form-control" autofocus>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="nombre" placeholder="Nombres" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="apellidoPaterno" placeholder="Apellido Paterno" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="apellidoMaterno" placeholder="Apellido Materno" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="direccion" placeholder="Dirección" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <input type="email" name="correo_electronico" placeholder="Correo electrónico" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <input type="number" maxlength="9" name="telefono" placeholder="Celular" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <input type="date" name="fecha_nac" placeholder="Fecha de Nacimiento" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" maxlength="1" name="genero" placeholder="Género" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <input type="password" name="password" placeholder="Contraseña" class="form-control">
-                            </div>
-                            
-                            <div class="form-group">
-                                <button class="btn btn-success btn-block">
-                                    Registrarse
-                                </button>
-                            </div>
-                        </form>
-                </div>
-            </div>
+<link rel="stylesheet" href="/css/loginregistrar.css" />
+{{! <div class="styled">
+  <div class="row">
+    <div class="col-md-4 mx-auto">
+      <div class="card text-center">
+        <div class="card-header">
+          <h2>Registro</h2>
         </div>
+        <div class="card-body">
+          <form action="/registro" method="post">
+            <div class="form-group">
+              <input
+                type="number"
+                maxlength="8"
+                name="dni"
+                placeholder="DNI"
+                class="form-control"
+                autofocus
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="text"
+                name="nombre"
+                placeholder="Nombres"
+                class="form-control"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="text"
+                name="apellidoPaterno"
+                placeholder="Apellido Paterno"
+                class="form-control"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="text"
+                name="apellidoMaterno"
+                placeholder="Apellido Materno"
+                class="form-control"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="text"
+                name="direccion"
+                placeholder="Dirección"
+                class="form-control"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="email"
+                name="correo_electronico"
+                placeholder="Correo electrónico"
+                class="form-control"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="number"
+                maxlength="9"
+                name="telefono"
+                placeholder="Celular"
+                class="form-control"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="date"
+                name="fecha_nac"
+                placeholder="Fecha de Nacimiento"
+                class="form-control"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="text"
+                maxlength="1"
+                name="genero"
+                placeholder="Género"
+                class="form-control"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="password"
+                name="password"
+                placeholder="Contraseña"
+                class="form-control"
+              />
+            </div>
+
+            <div class="form-group">
+              <button>
+                Registrarse
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
+  </div>
+</div> }}
+
+<div class="Contenedor">
+  <div class="DivCont">
+    <div class="DivImg" style="width: 45%">
+      <figure style="width: 100%">
+        <img src="/img/img2.jpeg" alt="imagen" />
+      </figure>
+    </div>
+
+    <div class="DivForm" style="width: 55%">
+      <form
+        class="Formulario"
+        action="/registro"
+        method="post"
+        style="width: 90%; height: 80%"
+      >
+
+        <h1 style="marginBottom: 15px">
+          <b>¡REGISTRATE!</b>
+        </h1>
+
+        <div class="GrupoComponenteGrupo">
+          <div class="GrupoInput">
+            <label class="Label" class="Label" for="nombre">Nombres</label>
+            <input
+              class="Input"
+              style="width: 100%"
+              type="text"
+              id="nombre"
+              name="nombre"
+            />
+          </div>
+
+          <div class="GrupoInput">
+            <label class="Label" for="apellidos">Apellido</label>
+            <input
+              class="Input"
+              style="width: 100%"
+              type="text"
+              id="apellidos"
+              name="apellidoPaterno"
+            />
+          </div>
+        </div>
+
+        <div class="GrupoComponenteGrupo">
+
+          <div class="GrupoInput">
+            <label class="Label" for="dni">DNI</label>
+            <input
+              type="number"
+              maxlength="8"
+              style="width: 100%"
+              id="dni"
+              name="dni"
+            />
+          </div>
+
+          <div class="GrupoInput">
+            <label class="Label" for="correo">Correo</label>
+            <input
+              class="Input"
+              style="width: 100%"
+              type="email"
+              id="correo"
+              name="correo_electronico"
+            />
+          </div>
+        </div>
+
+        <div class="GrupoComponenteGrupo">
+          <div class="GrupoInput">
+            <label class="Label" for="contra">Contraseña</label>
+            <input
+              class="Input"
+              style="width: 100%"
+              type="password"
+              id="contra"
+              name="password"
+            />
+          </div>
+
+          <div class="GrupoInput">
+            <label class="Label" for="contra2">Confirmar Contraseña</label>
+            <input
+              class="Input"
+              style="width: 100%"
+              type="password"
+              id="contra2"
+              name="contra2"
+            />
+          </div>
+        </div>
+
+        <div class="GrupoBoton" style="width: 100%">
+          <button class="Boton" style="width: 55%">Registrarse</button>
+        </div>
+
+        <div class="IrLogeoRegistrar">
+          <p>
+            ¿Ya tienes cuenta?
+            <a class="Enlace" href="/login">INICIAR SESIÓN</a>
+          </p>
+        </div>
+
+      </form>
+    </div>
+  </div>
 </div>

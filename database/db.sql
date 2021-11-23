@@ -26,7 +26,7 @@ create table persona(
 dni char(8) not null,
 nombre varchar(50) not null,
 apellidoPaterno varchar(50) not null,
-apellidoMaterno varchar(50) not null,
+apellidoMaterno varchar(50),
 direccion varchar(100),
 telefono char(9),
 correo_electronico varchar(100) not null,
