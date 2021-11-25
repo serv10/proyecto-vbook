@@ -30,15 +30,12 @@ passport.use(
             usuario,
             req.flash("success", "Bienvenido " + usuario.nombre)
           );
-          console.log(password);
-          console.log(usuario.password);
         } else {
           done(null, false, req.flash("message", "Contraseña incorrecta"));
           console.log("b");
         }
       } else {
         return done(null, false, req.flash("message", "Usuario no existe"));
-        console.log(rows.length);
       }
     }
   )

@@ -69,7 +69,6 @@
 <link rel="stylesheet" href="/css/nav.css" />
 
 <nav class="nav">
-  {{!-- {{#if user}} --}}
   <div class="nav-sup">
     <div class="nav-sup__grupo-icons">
       <i class="fab fa-instagram-square"></i>
@@ -82,19 +81,24 @@
       <i class="fas fa-search"></i>
     </div>
 
-    <div class="nav-sup__grupo-perfil">
-      <div class="nav-sup__mi-cuenta" href="/perfil/modificar">
-        <i class="fas fa-user-circle"></i>
-        <span>
-          Mi
-          <b>Perfil</b>
-        </span>
+    {{#if user}}
+      <div class="nav-sup__grupo-perfil">
+        <a class="nav-sup__mi-cuenta" href="/perfil">
+          <i class="fas fa-user-circle"></i>
+          <span>
+            Mi
+            <b>Perfil</b>
+          </span>
+        </a>
       </div>
-    </div>
+    {{/if}}
 
     <div class="nav-sup__grupo-registrar">
-      {{! <a href="/">PUBLICA UN LIBRO</a> }}
-      <a href="/login">INICIAR SESIÓN</a>
+      {{#if user}}
+        <a href="/">PUBLICA UN LIBRO</a>
+      {{else}}
+        <a href="/login">INICIAR SESIÓN</a>
+      {{/if}}
     </div>
   </div>
 
@@ -119,12 +123,4 @@
       </li>
     </ul>
   </div>
-  {{!-- {{else}} --}}
-  {{! <div class="barra">
-      <a href="/">
-        <span>V</span>
-        - book
-      </a>
-    </div> }}
-  {{!-- {{/if}} --}}
 </nav>

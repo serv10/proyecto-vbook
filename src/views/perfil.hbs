@@ -1,4 +1,4 @@
-<link rel="stylessheet" href="/css/estilos.css" />
+{{!-- <link rel="stylessheet" href="/css/estilos.css" />
 
 <div class="container p-4">
   <div class="row">
@@ -6,6 +6,183 @@
       <h3>Bienvenido {{user.apellidoPaterno}}</h3>
       <h4>Tu nombre es: {{user.nombre}}</h4>
       <h4>Tu correo es: {{user.correo_electronico}}</h4>
+    </div>
+  </div>
+</div> --}}
+{{> barra}}
+<link rel="stylesheet" href="/css/perfil-modificar.css" />
+
+<div class="DivCont">
+  <div class="ContDatosIzq">
+    <div class="DivImg">
+      <figure>
+        <img class="Img" src="/img/messi.jpg" alt="Foto Perfil" />
+      </figure>
+    </div>
+
+    <div class="GrupoContacto">
+      <h2>Contactos</h2>
+
+      <div class="Contactos">
+        <figure>
+          <img class="Img" src="/img/wsp.png" alt="WhatsApp" />
+        </figure>
+        <input class="Enlaces" type="url" placeholder="link de WhatsApp" />
+      </div>
+
+      <div class="Contactos">
+        <figure>
+          <img class="Img" src="/img/twitter.jpg" alt="Twitter" />
+        </figure>
+        <input class="Enlaces" type="url" placeholder="link de Twitter" />
+      </div>
+
+      <div class="Contactos">
+        <figure>
+          <img class="Img" src="/img/instagram.png" alt="Instagram" />
+        </figure>
+        <input class="Enlaces" type="url" placeholder="link de Instagram" />
+      </div>
+
+      <div class="Contactos">
+        <figure>
+          <img class="Img" src="/img/fb.png" alt="Facebook" />
+        </figure>
+        <input class="Enlaces" type="url" placeholder="link de Facebook" />
+      </div>
+
+      <div class="Contactos">
+        <figure>
+          <img class="Img" src="/img/watt.png" alt="Wattpad" />
+        </figure>
+        <input class="Enlaces" type="url" placeholder="link de Wattpad" />
+      </div>
+    </div>
+
+  </div>
+  <div class="ContDatosDer">
+
+    <h1>Sebastian Elias Ramos Villanueva</h1>
+
+    <div class="libros-publicados">
+      <h2>Libros a la venta</h2>
+
+      <div class="mis-libros">
+        <div class="libro">
+          <figure>
+            <img src="/img/l1.jpg" alt="libro" />
+          </figure>
+          <h3>La ciudad y los perros</h3>
+          <h4>de Mario Vargas Llosa</h4>
+          <div>Calificación</div>
+          <p>Precio</p>
+          <button type="button">Dar de baja</button>
+        </div>
+
+        <div class="libro">
+          <figure>
+            <img src="/img/l1.jpg" alt="libro" />
+          </figure>
+          <h3>La ciudad y los perros</h3>
+          <h4>de Mario Vargas Llosa</h4>
+          <div>Calificación</div>
+          <p>Precio</p>
+          <button type="button">Dar de baja</button>
+        </div>
+
+        <div class="libro">
+          <figure>
+            <img src="/img/l1.jpg" alt="libro" />
+          </figure>
+          <h3>La ciudad y los perros</h3>
+          <h4>de Mario Vargas Llosa</h4>
+          <div>Calificación</div>
+          <p>Precio</p>
+          <button type="button">Dar de baja</button>
+        </div>
+
+        <div class="libro">
+          <figure>
+            <img src="/img/l1.jpg" alt="libro" />
+          </figure>
+          <h3>La ciudad y los perros</h3>
+          <h4>de Mario Vargas Llosa</h4>
+          <div>Calificación</div>
+          <p>Precio</p>
+          <button type="button">Dar de baja</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="GrupoDatosModificar">
+      <div class="GrupoInfoPersonal">
+        <h2>Información Personal</h2>
+
+        <div class="GrupoInput">
+          <label for="nombres">Nombres</label>
+          <input class="Input" type="text" id="nombres" value="{{user.nombre}}" readonly/>
+        </div>
+
+        <div class="GrupoInput">
+          <label for="apellidoP">Apellido Paterno</label>
+          <input class="Input" type="text" id="apellidoP" value="{{user.apellidoPaterno}}" readonly/>
+        </div>
+
+        <div class="GrupoInput">
+          <label for="apellidoM">Apellido Materno</label>
+          <input class="Input" type="text" id="apellidoM" value="{{user.apellidoMaterno}}" readonly/>
+        </div>
+
+        <div class="GrupoInput">
+          <label for="celular">Número Celular</label>
+          <input class="Input" type="tel" id="celular" value="{{user.telefono}}" readonly/>
+        </div>
+
+        <div class="GrupoInput">
+          <label for="genero">Género</label>
+          <input class="Input" type="text" id="genero" value="{{user.genero}}" readonly/>
+        </div>
+
+        <div class="GrupoInput">
+          <label for="nacimiento">Fecha de Nacimiento</label>
+          <input class="Input" type="date" id="nacimiento" value="{{user.fecha_nac}}" readonly/>
+        </div>
+      </div>
+
+      <div class="GrupoInfoCuenta">
+        <h2>Información de la cuenta</h2>
+
+        <div class="GrupoInput">
+          <label for="usuario">Usuario</label>
+          <input class="Input" type="text" id="usuario" placeholder="" readonly/>
+        </div>
+
+        <div class="GrupoInput">
+          <label for="correo">Correo</label>
+          <input class="Input" type="email" id="correo" placeholder="" readonly/>
+        </div>
+
+        <div class="GrupoInput">
+          <label for="contra">Contraseña</label>
+          <input class="Input" type="password" id="contra" placeholder="" readonly/>
+        </div>
+
+        <h2>Dirección</h2>
+
+        <div class="GrupoInput">
+          <label for="distrito">Distrito</label>
+          <input class="Input" type="text" id="distrito" value="{{user.id_distrito}}" readonly/>
+        </div>
+
+        <div class="GrupoInput">
+          <label for="direc">Dirección</label>
+          <input class="Input" type="text" id="direc" value="{{user.direccion}}" readonly/>
+        </div>
+
+      </div>
+    </div>
+    <div class="BotonModificar">
+      <a href="/links/edituser/{{user.dni}}">Modificar Datos</a>
     </div>
   </div>
 </div>

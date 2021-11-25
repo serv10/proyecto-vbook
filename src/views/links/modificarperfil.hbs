@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="/css/perfil-modificar.css" />
 
+{{> barra}}
 <div class="DivCont">
   <div class="ContDatosIzq">
     <div class="DivImg">
@@ -77,12 +78,22 @@
           <input class="Input" type="tel" id="celular" placeholder="" />
         </div>
 
-        <h3>Género</h3>
-        <div class="GrupoInputRadio">
-          <label>
-            <input type="radio" value="masculino" />
-            Masculino
-          </label>
+        <div class="genero">
+          <h3>Género</h3>
+          <div class="GrupoInputRadio">
+            <label>
+              <input type="radio" value="masculino" />
+              Masculino
+            </label>
+            <label>
+              <input type="radio" value="femenino" />
+              Femenino
+            </label>
+            <label>
+              <input type="radio" value="otro" />
+              Otro
+            </label>
+          </div>
         </div>
 
         <div class="GrupoInputRadio">

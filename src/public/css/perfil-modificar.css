@@ -1,6 +1,6 @@
 .DivCont {
   background-color: #e9e9e9;
-  width: 80%;
+  width: 90%;
   display: flex;
   margin: auto;
 }
@@ -90,8 +90,11 @@
 
 .GrupoDatosModificar {
   display: flex;
+  padding-left: 3rem;
+  padding-top: 4rem;
 }
-.GrupoBoton {
+.GrupoBoton,
+.BotonModificar {
   display: flex;
   justify-content: center;
 }
@@ -118,18 +121,7 @@
   display: flex;
   flex-direction: column;
   width: 50%;
-  margin-top: 40px;
-  margin-left: 50px;
   height: 100%;
-}
-
-.GrupoInfoPersonal h2 {
-  font-weight: 900;
-  font-size: 23px;
-  line-height: 27px;
-
-  color: rgba(27, 27, 27, 0.76);
-  margin-bottom: 15px;
 }
 
 .GrupoInfoPersonal h3 {
@@ -158,23 +150,14 @@
   display: flex;
   flex-direction: column;
   width: 50%;
-  margin-top: 40px;
 }
 
-.GrupoInfoCuenta h2 {
-  font-weight: 900;
-  font-size: 23px;
-  line-height: 27px;
-  color: rgba(27, 27, 27, 0.76);
-  margin-bottom: 15px;
-}
-
-.GrupoInfoCuenta h3 {
-  margin-bottom: 10px;
-  font-weight: 500;
+.GrupoInfoPersonal h3 {
+  font-weight: 300;
   font-size: 20px;
   line-height: 23px;
-  color: rgba(0, 0, 0, 0.72);
+  margin-bottom: 10px;
+  color: rgba(0, 0, 0, 0.79);
 }
 
 .Input {
@@ -186,10 +169,10 @@
   border-radius: 3px;
   color: rgba(0, 0, 0, 0.79);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  padding: 0 5px;
-  min-height: 34px;
+  padding: 0 10px;
+  min-height: 40px;
   line-height: 30px;
-  font-size: 0.9rem;
+  font-size: 1.05rem;
 }
 
 .Input :focus {
@@ -197,10 +180,114 @@
   outline: none;
 }
 
-.GrupoInputRadio {
-  margin: 0 0 5px 10px;
+.genero {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 4px;
 }
 
-.GrupoInputRadio input {
+.GrupoInputRadio {
+  margin: 0 0 5px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.GrupoInputRadio label {
   margin-bottom: 10px;
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 23px;
+  color: rgba(0, 0, 0, 0.79);
+}
+
+.libros-publicados {
+  margin-left: 4rem;
+  margin-top: 3rem;
+  width: 85%;
+}
+
+.mis-libros {
+  display: flex;
+  justify-content: space-between;
+}
+
+.libro {
+  width: 20%;
+  color: rgba(27, 27, 27, 0.76);
+  text-align: center;
+}
+
+.libro figure img {
+  width: 100%;
+}
+
+.libro h3 {
+  font-size: 1.3rem;
+  margin-top: 0.6rem;
+  text-align: center;
+}
+
+.libro p {
+  font-weight: 900;
+  font-size: 1.5rem;
+  margin-top: 0.6rem;
+  text-align: center;
+}
+
+.libro h4 {
+  font-weight: 400;
+  font-size: 0.9rem;
+  line-height: 1rem;
+  text-align: center;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.libro div {
+  font-size: 1.5rem;
+}
+
+.libro button {
+  background-color: #36a7f7;
+  cursor: pointer;
+  border: none;
+  width: 90%;
+  font-weight: 400;
+  font-size: 1.3rem;
+  text-decoration: none;
+  color: white;
+  text-align: center;
+  margin: 10px 0;
+  border-radius: 6px;
+  line-height: 1.7rem;
+}
+
+h2 {
+  font-weight: 900;
+  font-size: 23px;
+  line-height: 27px;
+  color: rgba(27, 27, 27, 0.76);
+  margin-bottom: 15px;
+}
+
+.BotonModificar a {
+  background-color: #36a7f7;
+  height: 40px;
+  cursor: pointer;
+  border: none;
+  width: 30%;
+  font-weight: 900;
+  font-size: 1.4rem;
+  line-height: 23px;
+  text-decoration: none;
+  color: white;
+  text-align: center;
+  margin: auto 0;
+  border-radius: 10px;
+  margin-top: 50px;
+  margin-bottom: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

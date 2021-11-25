@@ -77,17 +77,13 @@ router.post("/editbook/:idLibro", isLoggedIn, async (req, res) => {
   res.redirect("/links/mislibros");
 });
 
-router.get("/edituser", isLoggedIn, async (req, res) => {
-  res.render("links/modificarperfil");
-});
-
-router.get("/editbook/:idLibro", isLoggedIn, async (req, res) => {
+router.get("/edituser/:dni", isLoggedIn, async (req, res) => {
   const { idUser } = req.params;
   const user = await pool.query("select*from persona where dni=?", [idUser]);
-  res.render("links/modificarperfil", { editbook: user[0] });
+  res.render("links/modificarperfil", { edituser: user[0] });
 });
 
-router.post("/edituser/:idUsuario", isLoggedIn, async (req, res) => {
+router.post("/edituser/:dni", isLoggedIn, async (req, res) => {
   const { idUser } = req.params;
 
   const {
@@ -123,8 +119,6 @@ router.post("/edituser/:idUsuario", isLoggedIn, async (req, res) => {
     id_region,
     id_distrito,
   };
-
-  console.log(actDatosUser);
 
   await pool.query("update persona set ? where dni = ?", [
     actDatosUser,
