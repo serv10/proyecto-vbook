@@ -38,47 +38,40 @@
   </div>
 </div> }}
 
-<div class="Contenedor">
-  <div class="DivCont">
-    <div class="DivImg">
-      <figure>
-        <img src="/img/img1.jpeg" alt="Personas leyendo" />
-      </figure>
+<div class="DivCont">
+  <div class="DivImg">
+    <figure>
+      <img src="/img/img1.jpeg" alt="Personas leyendo" />
+    </figure>
+  </div>
+
+  <form class="Formulario" action="/login" method="post">
+    <h1>¡BIENVENIDO!</h1>
+
+    <div class="GrupoInput">
+      <label class="Label" for="correo">Correo</label>
+      <input class="Input" type="text" id="correo" name="correo_electronico" />
     </div>
 
-    <form class="Formulario" action="/login" method="post">
-      <h1>¡BIENVENIDO!</h1>
+    <div class="GrupoInput">
+      <label class="Label" for="contra">Contraseña</label>
+      <input class="Input" type="password" id="contra" name="password" />
+    </div>
 
-      <div class="GrupoInput">
-        <label class="Label" for="correo">Correo</label>
-        <input
-          class="Input"
-          type="text"
-          id="correo"
-          name="correo_electronico"
-        />
-      </div>
+    <div class="OlvidarContra">
+      <button class="Boton">¿Olvidaste tu contraseña?</button>
+    </div>
 
-      <div class="GrupoInput">
-        <label class="Label" for="contra">Contraseña</label>
-        <input class="Input" type="password" id="contra" name="password" />
-      </div>
+    <div class="GrupoBoton">
+      <button class="Boton">INICIAR SESIÓN</button>
+    </div>
 
-      <div class="OlvidarContra">
-        <button class="Boton">¿Olvidaste tu contraseña?</button>
-      </div>
+    <div class="IrLogeoRegistrar">
+      <p>
+        ¿No tienes cuenta?
+        <a class="Enlace" href="/registro">REGISTRATE</a>
+      </p>
+    </div>
+  </form>
 
-      <div class="GrupoBoton">
-        <button class="Boton">INICIAR SESIÓN</button>
-      </div>
-
-      <div class="IrLogeoRegistrar">
-        <p>
-          ¿No tienes cuenta?
-          <a class="Enlace" href="/registro">REGISTRATE</a>
-        </p>
-      </div>
-    </form>
-
-  </div>
 </div>
