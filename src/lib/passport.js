@@ -3,6 +3,17 @@ const LocalStrategy = require("passport-local").Strategy;
 
 const pool = require("../database");
 const helpers = require("../lib/helpers");
+const handlebars = require('handlebars');
+
+const Swal = require('sweetalert2');
+
+handlebars.registerHelper ("checked", function (value, currentValue) {
+    if ( value == currentValue ) {
+       return "checked";
+    } else {
+       return "";
+    }
+ });
 
 passport.use(
   "local.login",
@@ -13,9 +24,10 @@ passport.use(
       passReqToCallback: true,
     },
     async (req, correo_electronico, password, done) => {
-      console.log(req.body);
+      //console.log(req.body);
       const rows = await pool.query(
-        "SELECT * FROM persona where correo_electronico=?",
+        /*"SELECT * FROM persona where correo_electronico=?",*/
+        "select p.dni, p.nombre, p.apellidoPaterno, p.apellidoMaterno, p.direccion, p.telefono, p.correo_electronico, p.password, p.genero, DATE_format(p.fecha_nac, '%Y-%m-%d') as fecha, pa.des_pais as aea, r.des_region, d.des_distrito from persona p inner join pais pa on p.id_pais = pa.id_pais inner join region r on p.id_region = r.id_region inner join distrito d on p.id_distrito = d.id_distrito where correo_electronico=?",
         [correo_electronico]
       );
       if (rows.length > 0) {
@@ -31,10 +43,11 @@ passport.use(
             req.flash("success", "Bienvenido " + usuario.nombre)
           );
         } else {
-          done(null, false, req.flash("message", "Contraseña incorrecta"));
-          console.log("b");
+          done(null, false, req.flash("message", "Contraseña incorrecta"));          
+          console.log("a");
         }
       } else {
+        console.log("b");
         return done(null, false, req.flash("message", "Usuario no existe"));
       }
     }
@@ -54,9 +67,10 @@ passport.use(
         dni,
         nombre,
         apellidoPaterno,
+        contra2,
         id_pais = 1,
         id_region = 1,
-        id_distrito = 1005,
+        id_distrito = 1043,
       } = req.body;
 
       const nuevoUsuario = {
@@ -68,11 +82,19 @@ passport.use(
         id_pais,
         id_region,
         id_distrito,
-      };
-      nuevoUsuario.password = await helpers.encryptPassword(password);
-      await pool.query("INSERT INTO PERSONA SET ?", [nuevoUsuario]);
-      //const result
-      return done(null, nuevoUsuario);
+      };      
+      const rows = await pool.query("SELECT * FROM PERSONA WHERE correo_electronico = ? OR DNI = ?", [correo_electronico, dni]);
+      if(password.toString()==contra2.toString()){
+        if(rows.length>0){
+          return done(null, false, req.flash("message", "Correo electronico o DNI ya existen"));          
+        }else{
+          nuevoUsuario.password = await helpers.encryptPassword(password);
+          await pool.query("INSERT INTO PERSONA SET ?", [nuevoUsuario]);
+          return done(null, nuevoUsuario);      
+        }
+      }else{
+        return done(null, false, req.flash("message", "Las contraseñas ingresadas no coinciden entre sí")); 
+      }
     }
   )
 );
@@ -82,6 +104,7 @@ passport.serializeUser((usuario, done) => {
 });
 
 passport.deserializeUser(async (dni, done) => {
-  const fila = await pool.query("SELECT * FROM PERSONA WHERE DNI=?", [dni]);
+  /*const fila = await pool.query("SELECT * FROM PERSONA WHERE DNI=?", [dni]);*/
+  const fila = await pool.query("select p.dni, p.nombre, p.apellidoPaterno, p.apellidoMaterno, p.direccion, p.telefono, p.correo_electronico, p.password, p.genero, DATE_format(p.fecha_nac, '%Y-%m-%d') as fecha, pa.des_pais, r.des_region, d.des_distrito as distrito from persona p inner join pais pa on p.id_pais = pa.id_pais inner join region r on p.id_region = r.id_region inner join distrito d on p.id_distrito = d.id_distrito where p.dni = ?",[dni]);
   done(null, fila[0]);
 });

@@ -62,7 +62,7 @@
   </div>
   <div class="ContDatosDer">
 
-    <h1>Sebastian Elias Ramos Villanueva</h1>
+    <h1>{{user.nombre}} {{user.apellidoPaterno}} {{user.apellidoMaterno}}</h1>
 
     <div class="libros-publicados">
       <h2>Libros a la venta</h2>
@@ -140,12 +140,14 @@
 
         <div class="GrupoInput">
           <label for="genero">Género</label>
-          <input class="Input" type="text" id="genero" value="{{user.genero}}" readonly/>
+          <label><input type="radio" name="genero" value="M" disabled {{{checked user.genero 'M'}}}>Masculino</label><br>
+          <label><input type="radio" name="genero" value="F" disabled {{{checked user.genero 'F'}}}>Femenino</label><br>
+          <label><input type="radio" name="genero" value="O" disabled {{{checked user.genero 'O'}}}>Otro</label><br>
         </div>
 
         <div class="GrupoInput">
           <label for="nacimiento">Fecha de Nacimiento</label>
-          <input class="Input" type="date" id="nacimiento" value="{{user.fecha_nac}}" readonly/>
+          <input class="Input" type="date" id="nacimiento" value="{{user.fecha}}" readonly/>
         </div>
       </div>
 
@@ -154,12 +156,12 @@
 
         <div class="GrupoInput">
           <label for="usuario">Usuario</label>
-          <input class="Input" type="text" id="usuario" placeholder="" readonly/>
+          <input class="Input" type="text" id="usuario" value="{{user.nombre}} {{user.apellidoPaterno}} {{user.apellidoMaterno}}" placeholder="" readonly/>
         </div>
 
         <div class="GrupoInput">
           <label for="correo">Correo</label>
-          <input class="Input" type="email" id="correo" placeholder="" readonly/>
+          <input class="Input" type="email" id="correo" value="{{user.correo_electronico}}" placeholder="" readonly/>
         </div>
 
         <div class="GrupoInput">
@@ -171,7 +173,7 @@
 
         <div class="GrupoInput">
           <label for="distrito">Distrito</label>
-          <input class="Input" type="text" id="distrito" value="{{user.id_distrito}}" readonly/>
+          <input class="Input" type="text" id="distrito" value="{{user.distrito}}" readonly/>
         </div>
 
         <div class="GrupoInput">

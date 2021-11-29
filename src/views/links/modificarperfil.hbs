@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="/css/perfil-modificar.css" />
 
 {{> barra}}
+  <form action="/links/edituser/{{user.dni}}" method="POST">
 <div class="DivCont">
   <div class="ContDatosIzq">
     <div class="DivImg">
@@ -50,9 +51,10 @@
     </div>
 
   </div>
+
   <div class="ContDatosDer">
 
-    <h1>Sebastian Elias Ramos Villanueva</h1>
+    <h1>{{user.nombre}} {{user.apellidoPaterno}} {{user.apellidoMaterno}}</h1>
 
     <div class="GrupoDatosModificar">
       <div class="GrupoInfoPersonal">
@@ -60,59 +62,34 @@
 
         <div class="GrupoInput">
           <label for="nombres">Nombres</label>
-          <input class="Input" type="text" id="nombres" placeholder="" />
+          <input class="Input" type="text" id="nombre" disabled value="{{user.nombre}}" placeholder="" />
         </div>
 
         <div class="GrupoInput">
           <label for="apellidoP">Apellido Paterno</label>
-          <input class="Input" type="text" id="apellidoP" placeholder="" />
+          <input class="Input" type="text" id="apellidoPaterno" disabled value="{{user.apellidoPaterno}}" placeholder="" />
         </div>
 
         <div class="GrupoInput">
           <label for="apellidoM">Apellido Materno</label>
-          <input class="Input" type="text" id="nombres" placeholder="" />
+          <input class="Input" type="text" id="apellidoMaterno" value="{{user.apellidoMaterno}}" placeholder="" />
         </div>
 
         <div class="GrupoInput">
           <label for="celular">Número Celular</label>
-          <input class="Input" type="tel" id="celular" placeholder="" />
+          <input class="Input" type="tel" id="celular" value="{{user.telefono}}" placeholder="" />
         </div>
 
-        <div class="genero">
-          <h3>Género</h3>
-          <div class="GrupoInputRadio">
-            <label>
-              <input type="radio" value="masculino" />
-              Masculino
-            </label>
-            <label>
-              <input type="radio" value="femenino" />
-              Femenino
-            </label>
-            <label>
-              <input type="radio" value="otro" />
-              Otro
-            </label>
-          </div>
-        </div>
-
-        <div class="GrupoInputRadio">
-          <label>
-            <input type="radio" value="femenino" />
-            Femenino
-          </label>
-        </div>
-
-        <div class="GrupoInputRadio">
-          <label>
-            <input type="radio" value="otro" />
-            Otro
-          </label>
+        <div class="GrupoInput">
+          <label for="genero">Género</label>
+          <label><input type="radio" name="genero" value="M" {{{checked user.genero 'M'}}}>Masculino</label><br>
+          <label><input type="radio" name="genero" value="F" {{{checked user.genero 'F'}}}>Femenino</label><br>
+          <label><input type="radio" name="genero" value="O" {{{checked user.genero 'O'}}}>Otro</label><br>
         </div>
 
         <div class="GrupoInput">
           <label for="nacimiento">Fecha de Nacimiento</label>
-          <input class="Input" type="date" id="nacimiento" placeholder="" />
+          <input class="Input" type="date" id="fecha_nacimiento" value="{{user.fecha}}" placeholder="" />
         </div>
       </div>
 
@@ -121,33 +98,31 @@
 
         <div class="GrupoInput">
           <label for="usuario">Usuario</label>
-          <input class="Input" type="text" id="usuario" placeholder="" />
+          <input class="Input" type="text" id="usuario" disabled value="{{user.nombre}} {{user.apellidoPaterno}} {{user.apellidoMaterno}}" placeholder="" />
         </div>
 
         <div class="GrupoInput">
           <label for="correo">Correo</label>
-          <input class="Input" type="email" id="correo" placeholder="" />
+          <input class="Input" type="email" id="correo" disabled value="{{user.correo_electronico}}" placeholder="" />
         </div>
 
         <div class="GrupoInput">
           <label for="contra">Contraseña</label>
-          <input class="Input" type="password" id="contra" placeholder="" />
+          <input class="Input" type="password" id="contra" disabled value="{{user.password}}" placeholder="" />
         </div>
 
         <h2>Dirección</h2>
 
         <div class="GrupoInput">
           <label for="distrito">Distrito</label>
-          <select name="distrito" class="Input">
-            <option value="d1">Ancon 1</option>
-            <option value="d2">San Juan 2</option>
-            <option value="d3">Hola</option>
+          <select class="Input">
+            
           </select>
         </div>
 
         <div class="GrupoInput">
           <label for="direc">Dirección</label>
-          <input class="Input" type="text" id="direc" placeholder="" />
+          <input class="Input" type="text" id="direc" value="{{user.direccion}}" placeholder="" />
         </div>
 
       </div>
@@ -157,3 +132,4 @@
     </div>
   </div>
 </div>
+  </form>

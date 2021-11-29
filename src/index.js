@@ -7,6 +7,7 @@ const session =require('express-session');
 const mysqlstore = require('express-mysql-session');
 const passport = require('passport');
 const{database} = require('./keys');
+const swal = require('sweetalert2');
 
 //inicializaciones
 const app = express();
