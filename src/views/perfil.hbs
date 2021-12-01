@@ -1,14 +1,3 @@
-{{!-- <link rel="stylessheet" href="/css/estilos.css" />
-
-<div class="container p-4">
-  <div class="row">
-    <div class="card text-center">
-      <h3>Bienvenido {{user.apellidoPaterno}}</h3>
-      <h4>Tu nombre es: {{user.nombre}}</h4>
-      <h4>Tu correo es: {{user.correo_electronico}}</h4>
-    </div>
-  </div>
-</div> --}}
 {{> barra}}
 <link rel="stylesheet" href="/css/perfil-modificar.css" />
 
@@ -140,9 +129,7 @@
 
         <div class="GrupoInput">
           <label for="genero">Género</label>
-          <label><input type="radio" name="genero" value="M" disabled {{{checked user.genero 'M'}}}>Masculino</label><br>
-          <label><input type="radio" name="genero" value="F" disabled {{{checked user.genero 'F'}}}>Femenino</label><br>
-          <label><input type="radio" name="genero" value="O" disabled {{{checked user.genero 'O'}}}>Otro</label><br>
+          <input class="Input" type="text" id="genero" value="{{user.genero}}" readonly/>
         </div>
 
         <div class="GrupoInput">

@@ -82,14 +82,23 @@
     </div>
 
     {{#if user}}
-      <div class="nav-sup__grupo-perfil">
-        <a class="nav-sup__mi-cuenta" href="/perfil">
-          <i class="fas fa-user-circle"></i>
-          <span>
-            Mi
-            <b>Perfil</b>
-          </span>
-        </a>
+      <div class="nav-sup__mi-cuenta">
+        <i class="fas fa-user-circle"></i>
+        <span>
+          Mi
+          <b>Cuenta</b>
+        </span>
+        <ul id="nav-sup__sublista" class="nav-sup__sub-menu-disactive">
+          <li>
+            <a href="/perfil">Ir a mi perfil</a>
+          </li>
+          <li>
+            <a href="/links/edituser/{{user.dni}}">Editar Perfil</a>
+          </li>
+          <li>
+            <a href="/logout">Cerrar Sesión</a>
+          </li>
+        </ul>
       </div>
     {{/if}}
 
@@ -109,18 +118,40 @@
       </a>
     </div>
     <ul class="nav-inf__listas">
-      <li>
-        <a href="/categorias">Categorias</a>
+      <li class="nav-inf__lista">
+        <a href="/categorias" class="nav-inf__item">
+          Categorias
+          <i class="fas fa-angle-right"></i>
+        </a>
+        <ul class="nav-inf__sublistas">
+          <li>
+            <a href="#">Épico</a>
+          </li>
+          <li>
+            <a href="#">Lírico</a>
+          </li>
+          <li>
+            <a href="#">Dramático</a>
+          </li>
+          <li>
+            <a href="#">Narrativo</a>
+          </li>
+          <li>
+            <a href="#">Expositivo</a>
+          </li>
+        </ul>
       </li>
-      <li>
-        <a href="/links/mislibros">Mis libros</a>
+      <li class="nav-inf__lista">
+        <a class="nav-inf__item" href="/ayuda">Ayuda</a>
       </li>
-      <li>
-        <a href="/ayuda">Ayuda</a>
+      <li class="nav-inf__lista">
+        <a class="nav-inf__item" href="/denunciar">Denunciar</a>
       </li>
-      <li>
-        <a href="/denunciar">Denunciar</a>
+      <li class="nav-inf__lista">
+        <a class="nav-inf__item" href="/nostros">Nosotros</a>
       </li>
     </ul>
   </div>
 </nav>
+
+<script src="/js/nav.js"></script>
