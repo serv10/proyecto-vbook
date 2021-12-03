@@ -1,7 +1,7 @@
 const helpers = {};
 
-helpers.selected = (valueUser, valueDistrict) => {
-  return valueUser === valueDistrict ? (selected = "selected") : "";
+helpers.selected = (valueDistrict, valueUser) => {
+  return valueUser === valueDistrict ? 'selected = "selected"' : "";
 };
 
 module.exports = helpers;

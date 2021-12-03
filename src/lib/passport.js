@@ -5,6 +5,14 @@ const pool = require("../database");
 const helpers = require("../lib/helpers");
 const handlebars = require("handlebars");
 
+const expresiones = {
+  nombre: /^[a-zA-ZÀ-ÿ\s]{1,50}$/, // Letras y espacios, pueden llevar acentos.
+  apellido: /^[a-zA-ZÀ-ÿ\s]{1,50}$/, // Letras y espacios, pueden llevar acentos.
+  password: /^.{4,10}$/, // 4 a 10 digitos.
+  correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+  dni: /^[0-9]{8}$/, // 8 digitos.
+};
+
 handlebars.registerHelper("checked", function (value, currentValue) {
   if (value == currentValue) {
     return "checked";
@@ -37,7 +45,11 @@ passport.use(
         if (validPassword) {
           done(null, usuario);
         } else {
-          done(null, false, req.flash("message", "Correo o Contraseña"));
+          done(
+            null,
+            false,
+            req.flash("message", "Correo o Contraseña erróneo")
+          );
         }
       } else {
         return done(null, false, req.flash("message", "Usuario no existe"));
@@ -75,11 +87,23 @@ passport.use(
         id_region,
         id_distrito,
       };
+
       const rows = await pool.query(
         "SELECT * FROM PERSONA WHERE correo_electronico = ? OR DNI = ?",
         [correo_electronico, dni]
       );
-      if (password === password2) {
+
+      if (
+        !(
+          expresiones.nombre.test(nombre) &&
+          expresiones.apellido.test(apellidoPaterno) &&
+          expresiones.password.test(password) &&
+          expresiones.correo.test(correo_electronico) &&
+          expresiones.dni.test(dni)
+        )
+      )
+        return done(null, false, req.flash("message", "Campos erróneos"));
+      else if (password === password2) {
         if (rows.length > 0)
           return done(
             null,

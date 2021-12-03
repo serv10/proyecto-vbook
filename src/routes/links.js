@@ -105,7 +105,7 @@ router.post("/edituser/:dni", isLoggedIn, async (req, res) => {
       foto = "",
       id_pais = 1,
       id_region = 1,
-      id_distrito = 1031,
+      id_distrito,
     } = req.body;
 
     /* var { password = "123456" } = req.body;
@@ -126,8 +126,8 @@ router.post("/edituser/:dni", isLoggedIn, async (req, res) => {
       id_distrito,
     };
 
-    console.log(actDatosUser);
-    console.log(dni);
+    /* console.log(actDatosUser);
+    console.log(dni); */
 
     /* await pool.query("UPDATE persona SET nombre=? WHERE dni=?", [
       nombre,

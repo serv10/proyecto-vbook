@@ -9,14 +9,6 @@ const expresiones = {
   dni: /^[0-9]{8}$/, // 8 digitos.
 };
 
-const campos = {
-  nombre: false,
-  apellido: false,
-  password: false,
-  correo: false,
-  dni: false,
-};
-
 const validarFormulario = (e) => {
   switch (e.target.name) {
     case "nombre":
@@ -58,7 +50,6 @@ const validarCampo = (expresion, input, campo) => {
     document
       .querySelector(`#grupo__${campo} .formulario__input-error`)
       .classList.remove("formulario__input-error-activo");
-    campos[campo] = true;
   } else {
     document
       .getElementById(`grupo__${campo}`)
@@ -75,7 +66,6 @@ const validarCampo = (expresion, input, campo) => {
     document
       .querySelector(`#grupo__${campo} .formulario__input-error`)
       .classList.add("formulario__input-error-activo");
-    campos[campo] = false;
   }
 };
 
@@ -99,7 +89,6 @@ const validarPassword2 = () => {
     document
       .querySelector(`#grupo__password2 .formulario__input-error`)
       .classList.add("formulario__input-error-activo");
-    campos["password"] = false;
   } else {
     document
       .getElementById(`grupo__password2`)
@@ -116,7 +105,6 @@ const validarPassword2 = () => {
     document
       .querySelector(`#grupo__password2 .formulario__input-error`)
       .classList.remove("formulario__input-error-activo");
-    campos["password"] = true;
   }
 };
 
