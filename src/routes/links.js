@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-
 const pool = require("../database");
 const { isLoggedIn } = require("../lib/auth");
+const helpers = require("../lib/helpers");
 
 router.get("/add", isLoggedIn, (req, res) => {
   res.render("links/add");
@@ -48,16 +48,20 @@ router.get("/mislibros", isLoggedIn, async (req, res) => {
 
 router.get("/change/:idLibro", isLoggedIn, async (req, res) => {
   const { idLibro } = req.params;
-  await pool.query("update libro set estado = 2 where idLibro=? and dni=?", [idLibro, req.user.dni]);
+  await pool.query("update libro set estado = 2 where idLibro=? and dni=?", [
+    idLibro,
+    req.user.dni,
+  ]);
   req.flash("success", "El libro ha sido desactivado");
   res.redirect("/links/mislibros");
 });
 
 router.get("/editbook/:idLibro", isLoggedIn, async (req, res) => {
   const { idLibro } = req.params;
-  const libro = await pool.query("select*from libro where idLibro=? and dni=?", [
-    idLibro, req.user.dni
-  ]);
+  const libro = await pool.query(
+    "select*from libro where idLibro=? and dni=?",
+    [idLibro, req.user.dni]
+  );
   res.render("links/editbook", { editbook: libro[0] });
 });
 
@@ -78,55 +82,63 @@ router.post("/editbook/:idLibro", isLoggedIn, async (req, res) => {
 });
 
 router.get("/edituser/:dni", isLoggedIn, async (req, res) => {
-  const { idUser } = req.params;
-  const user = await pool.query("select*from persona where dni=?", [idUser]);
-  //const distrito = await pool.query("select id_distrito, des_distrito from distrito");
-  res.render("links/modificarperfil", { edituser: user[0] });  
+  const { dni } = req.params;
+  const user = await pool.query("select*from persona where dni=?", [dni]);
+  const distrito = await pool.query(
+    "select id_distrito, des_distrito from distrito"
+  );
+  res.render("links/modificarperfil", { edituser: user[0], distrito });
 });
 
 router.post("/edituser/:dni", isLoggedIn, async (req, res) => {
-  const { idUser } = req.params;
-  const {
-    dni,
-    nombre,
-    apellidoPaterno,
-    apellidoMaterno,
-    direccion,
-    telefono,
-    correo_electronico,
-    genero,
-    fecha_nac,
-    foto,
-    id_pais = 1,
-    id_region = 1,
-    id_distrito = 1043,
-  } = req.body;
+  try {
+    const { dni } = req.params;
+    const {
+      nombre,
+      apellidoPaterno,
+      apellidoMaterno,
+      direccion,
+      telefono,
+      correo_electronico,
+      genero,
+      fecha_nac,
+      foto = "",
+      id_pais = 1,
+      id_region = 1,
+      id_distrito,
+    } = req.body;
 
-  const actDatosUser = {
-    dni,
-    nombre,
-    apellidoPaterno,
-    apellidoMaterno,
-    apellido,
-    direccion,
-    telefono,
-    correo_electronico,
-    genero,
-    fecha_nac,
-    foto,
-    id_pais,
-    id_region,
-    id_distrito,
-  };
+    /* var { password = "123456" } = req.body;
+    password = await helpers.encryptPassword(password); */
 
-  await pool.query("update persona set ? where dni = ?", [
-    actDatosUser,
-    idUser,
-  ]);
+    const actDatosUser = {
+      nombre,
+      apellidoPaterno,
+      apellidoMaterno,
+      direccion,
+      telefono,
+      correo_electronico,
+      genero,
+      fecha_nac,
+      foto,
+      id_pais,
+      id_region,
+      id_distrito,
+    };
 
-  req.flash("success", "Datos actualizados satisfactoriamente");
+    /* console.log(actDatosUser);
+    console.log(dni); */
 
-  res.redirect("/links/modificarperfil");
+    /* await pool.query("UPDATE persona SET nombre=? WHERE dni=?", [
+      nombre,
+      req.params.dni,
+    ]);
+    */
+    req.flash("message", "Datos actualizados satisfactoriamente");
+    res.redirect(dni);
+  } catch (e) {
+    console.log(e);
+  }
 });
 
 module.exports = router;

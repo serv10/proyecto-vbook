@@ -1,14 +1,10 @@
-.nav-sup,
-.nav-inf {
+.nav-sup {
   position: relative;
   display: flex;
   justify-content: space-around;
   align-items: center;
   width: 100%;
   padding: 0 50px;
-}
-
-.nav-sup {
   height: 80px;
   background-color: #e9e9e9;
 }
@@ -29,13 +25,13 @@
 }
 
 .nav-sup__grupo-busqueda {
-  position: absolute;
-  width: 60%;
-  left: 28%;
+  position: relative;
+  width: 40%;
+  left: 20%;
 }
 
 .nav-sup__grupo-busqueda input {
-  width: 70%;
+  width: 100%;
   min-height: 2.3rem;
   line-height: 25px;
   padding-left: 10px;
@@ -51,7 +47,7 @@
 
 .nav-sup__grupo-busqueda i {
   position: absolute;
-  left: 67%;
+  left: 95%;
   top: 26%;
   opacity: 0.9;
   z-index: 50;
@@ -62,41 +58,65 @@
   outline: none;
 }
 
-.nav-sup__grupo-perfil {
-  position: absolute;
-  left: 67%;
-  width: 20%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .nav-sup__mi-cuenta {
   display: flex;
-  text-align: center;
   align-items: center;
   cursor: pointer;
-  color: black;
-  text-decoration: none;
+  position: relative;
+  left: 15%;
+  text-align: center;
 }
 
 .nav-sup__mi-cuenta i {
   font-size: 1.9rem;
   cursor: pointer;
-  margin-right: 15px;
+  width: 50%;
 }
 
 .nav-sup__mi-cuenta span {
-  width: 30%;
+  width: 50%;
+}
+
+.nav-sup__sub-menu-active {
+  position: absolute;
+  top: 120%;
+  background-color: #e9e9e9;
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  left: -16px;
+  border: 1px solid rgba(196, 196, 196);
+  border-radius: 10px;
+}
+
+.nav-sup__sub-menu-disactive {
+  display: none;
+}
+
+.nav-sup__sub-menu-active li {
+  width: 9rem;
+}
+
+.nav-sup__sub-menu-active li a {
+  color: #000;
+  text-align: left;
+  line-height: 45px;
+  padding: 0 1rem;
+}
+
+.nav-sup__sub-menu-active li:hover {
+  background: rgba(196, 196, 196, 0.5);
+  transition: all 0.3s ease;
 }
 
 .nav-sup__grupo-registrar {
-  position: absolute;
-  left: 80%;
+  position: relative;
+  left: 8%;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 20%;
+  width: 15%;
 }
 
 .nav-sup__grupo-registrar a {
@@ -106,7 +126,7 @@
   height: auto;
   cursor: pointer;
   font-weight: 900;
-  width: 65%;
+  width: 100%;
   transition: 0.1s ease all;
   line-height: 30px;
   font-size: 1.2rem;
@@ -119,8 +139,14 @@
 }
 
 .nav-inf {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  padding: 0 50px;
   background: #36a7f7;
   height: 71px;
+  z-index: 50;
 }
 
 .nav-inf__grupo-logo {
@@ -128,7 +154,7 @@
   height: 120px;
   display: flex;
   justify-content: center;
-
+  z-index: 80;
   background: #36a7f7;
   border-radius: 13px;
 }
@@ -156,25 +182,72 @@
   width: 65%;
   display: flex;
   justify-content: space-around;
+  z-index: 60;
+}
+
+ul {
   list-style: none;
 }
 
-.nav-inf__listas li {
+.nav-inf__lista {
+  position: relative;
   width: 25%;
+  --clip: polygon(0 0, 100% 0, 100% 0, 0 0);
+  --transform: rotate(0deg);
 }
 
-.nav-inf__listas li a {
-  display: block;
+.nav-inf__lista:hover {
+  --clip: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  --transform: rotate(90deg);
+}
+
+a {
   text-decoration: none;
+}
+
+.nav-inf__item {
+  display: block;
   color: white;
-  font-weight: 300;
+  font-weight: 500;
   font-size: 20px;
   line-height: 71px;
   text-align: center;
 }
 
-.nav-inf__listas li a:hover {
+.nav-inf__item i {
+  position: relative;
+  left: 5%;
+  transform: var(--transform);
+  transition: transform 0.5s;
+}
+
+.nav-inf__item:hover,
+.nav-inf__sublistas li a:hover {
   background: rgba(37, 154, 237, 0.61);
+}
+
+.nav-inf__sublistas {
+  position: absolute;
+  background-color: #36a7f7;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  clip-path: var(--clip);
+  transition: clip-path 0.3s;
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.nav-inf__sublistas li {
+  width: 100%;
+}
+
+.nav-inf__sublistas li a {
+  display: block;
+  color: white;
+  text-align: center;
+  line-height: 40px;
 }
 
 .barra {
@@ -186,6 +259,7 @@
 }
 
 .barra a {
+  display: block;
   text-decoration: none;
   color: #fff;
   font-weight: bold;

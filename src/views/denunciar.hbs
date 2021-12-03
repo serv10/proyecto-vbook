@@ -1,42 +1,62 @@
 <link rel="stylesheet" href="/css/denunciar.css" />
-
 {{> navigation}}
-
 <main class="index" style="width:100%">
-    <h1 class="mb-1" style="margin: 25;">
-        DENUNCIAR
-    </h1>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="box-shadow-full" style="padding-top: 3rem;">
-                    <div class="row">
-                        <h2 style="margin-bottom: 25px;">
-                            Usuario a denunciar
-                        </h2>
-                        <div class="wrap-mensaje validate-input alert-validate" data-validate="Name is required">
-                            <input class="mensaje" type="text" name="name" placeholder="Usuario..." spellcheck="false" data-ms-editor="true">
-                            <span class="focus-mensaje"></span>
-                        </div>
-
-                        <h2 style="margin-bottom: 25px;margin-top: 25px;">Razón de la denuncia</h2>
-                            <div class="contenedor-mensaje validate-input" data-validate="Message is required">
-                                <textarea class="mensaje" name="message" placeholder="Denuncia..." spellcheck="false" data-ms-editor="true"></textarea>
-                                <span class="focus-mensaje"></span>
-                            </div>
-
-                        <h2 style="margin-bottom: 15px;">Evidencia de denuncia</h2>
-                        <input class="form-control" type="file" id="formFile">
-
-                        <div class="text-center" style="margin-top: 25px;">
-                                <button type="button" class="btn btn-primary" style="font-size: 17px;font-weight: 900;">PUBLICAR DENUNCIA</button>
-                        </div>
-                    </div>
-                </div>
+  <h1 class="mb-1" style="margin: 25;">
+    DENUNCIAR
+  </h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="box-shadow-full" style="padding-top: 3rem;">
+          <div class="row">
+            <h2 style="margin-bottom: 25px;">
+              Usuario a denunciar
+            </h2>
+            <div
+              class="wrap-mensaje validate-input alert-validate"
+              data-validate="Name is required"
+            >
+              <input
+                class="mensaje"
+                type="text"
+                name="name"
+                placeholder="Usuario..."
+                spellcheck="false"
+                data-ms-editor="true"
+              />
+              <span class="focus-mensaje"></span>
             </div>
+
+            <h2 style="margin-bottom: 25px;margin-top: 25px;">Razón de la
+              denuncia</h2>
+            <div
+              class="contenedor-mensaje validate-input"
+              data-validate="Message is required"
+            >
+              <textarea
+                class="mensaje"
+                name="message"
+                placeholder="Denuncia..."
+                spellcheck="false"
+                data-ms-editor="true"
+              ></textarea>
+              <span class="focus-mensaje"></span>
+            </div>
+
+            <h2 style="margin-bottom: 15px;">Evidencia de denuncia</h2>
+            <input class="form-control" type="file" id="formFile" />
+
+            <div class="text-center" style="margin-top: 25px;">
+              <button
+                type="button"
+                class="btn btn-primary"
+                style="font-size: 17px;font-weight: 900;"
+              >PUBLICAR DENUNCIA</button>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-
-
+  </div>
 
 </main>
