@@ -1,71 +1,3 @@
-{{!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container">
-    <a class="navbar-brand" href="/">V-BOOK</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarNav"
-      aria-controls="navbarNav"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ml-auto">
-        {{#if user}}
-          <li class="nav-item active">
-            <a class="nav-link" href="/links/mislibros">Mis libros</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="navbarDropdown"
-              role="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              Categorías
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Épico</a>
-              <a class="dropdown-item" href="#">Lírico</a>
-              <a class="dropdown-item" href="#">Dramático</a>
-              <a class="dropdown-item" href="#">Narrativo</a>
-              <a class="dropdown-item" href="#">Expositivo</a>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/links/add">Publicar libro</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Lo más vendido</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Ayuda</a>
-          </li>
-          <li class="nav-item">
-            <a href="/perfil" class="nav-link">Mi Perfil</a>
-          </li>
-          <li class="nav-item">
-            <a href="/logout" class="nav-link">Cerrar Sesión</a>
-          </li>
-        {{else}}
-          <li class="nav-item">
-            <a href="/login" class="nav-link">Iniciar Sesion</a>
-          </li>
-          <li class="nav-item">
-            <a href="/registro" class="nav-link">Regístrate</a>
-          </li>
-        {{/if}}
-      </ul>
-    </div>
-  </div>
-</nav>  --}}
-
 <link rel="stylesheet" href="/css/nav.css" />
 
 <nav class="nav">
@@ -82,18 +14,21 @@
     </div>
 
     {{#if user}}
-      <div class="nav-sup__mi-cuenta">
+      <div id="nav-sup__mi-cuenta" class="nav-sup__mi-cuenta">
         <i class="fas fa-user-circle"></i>
         <span>
           Mi
           <b>Cuenta</b>
         </span>
-        <ul id="nav-sup__sublista" class="nav-sup__sub-menu-disactive">
+        <ul
+          id="nav-sup__sublista"
+          class="nav-sup__sub-menu-active nav-sup__sub-menu-disactive"
+        >
           <li>
             <a href="/perfil">Ir a mi perfil</a>
           </li>
           <li>
-            <a href="/links/edituser/{{user.dni}}">Editar Perfil</a>
+            <a href="/links/edituser/datos/{{user.dni}}">Editar Perfil</a>
           </li>
           <li>
             <a href="/logout">Cerrar Sesión</a>

@@ -1,7 +1,8 @@
 <link rel="stylesheet" href="/css/perfil-modificar.css" />
-{{> barra}}
-<div class="DivCont">
 
+{{!-- {{> barra}} --}}
+
+<div class="DivCont">
   <div class="ContDatosIzq">
     <div class="DivImg">
       <figure>
@@ -53,14 +54,19 @@
 
   <form
     class="ContDatosDer"
-    action="/links/edituser/{{user.dni}}"
+    action="/links/edituser/datos/{{user.dni}}"
     method="POST"
   >
 
     <h1>{{user.nombre}} {{user.apellidoPaterno}} {{user.apellidoMaterno}}</h1>
 
+    {{#if success}}
+      <div id="message" class="mensaje-exito mensaje-activar">
+        {{success}}
+      </div>
+    {{/if}}
     {{#if message}}
-      <div id="message" class="mensaje">
+      <div id="message" class="mensaje-error mensaje-activar">
         {{message}}
       </div>
     {{/if}}
@@ -157,7 +163,7 @@
             type="text"
             id="usuario"
             name="usuario"
-            value="{{user.nombre}} {{user.apellidoPaterno}} {{user.apellidoMaterno}}"
+            {{!-- value="{{user.nombre}} {{user.apellidoPaterno}} {{user.apellidoMaterno}}" --}}
           />
         </div>
 
@@ -173,30 +179,23 @@
         </div>
 
         <div class="GrupoInput">
-          <label for="contra">Contraseña</label>
-          <input
-            class="Input"
-            type="password"
-            id="contra"
-            name="password"
-            value="{{user.password}}"
-          />
+          <label>Contraseña</label>
+          <button class="btn-cambiar-contra">Modificar Contraseña</button>
         </div>
 
         <h2>Dirección</h2>
 
         <div class="GrupoInput">
           <label for="distrito">Distrito</label>
-          <select class="Input" name="id_distrito">
-              {{#each distrito}}
-              <option value="{{id_distrito}}" {{selected id_distrito ../user.codigodistrito}}</option>
-                    {{des_distrito}}
+          <select select class="Input" name="id_distrito">
+            {{#each distrito}}
+              <option
+                value="{{id_distrito}}"
+                {{!-- {{selected id_distrito ../user.codigodistrito}} --}}
+              >
+                {{des_distrito}}
               </option>
-              {{/each}}
-
-              {{!-- <option>Hola</option>
-              <option selected="selected">Chao</option>
-              <option>Adios</option> --}}
+            {{/each}}
           </select>
         </div>
 
@@ -219,10 +218,60 @@
   </form>
 </div>
 
-{{#if message}}
-<script>
-  document.getElementById("message").classList.add('mensaje-activar')
-  setTimeout(() => {
-  document.getElementById("message").classList.remove('mensaje-activar'); }, 5000);
-</script>
-{{/if}}
+{{! modal }}
+<div class="modal-contenedor">
+  <div class="modal modal-close">
+    <div class="cerrar">X</div>
+    <h2 style="text-align: center; margin-bottom:0.6rem">Editar Contraseña</h2>
+
+    {{!-- {{#if success}}
+      <div id="message" class="mensaje-exito-contra mensaje-activar">
+        {{success}}
+      </div>
+    {{/if}}
+    {{#if message}}
+      <div id="message" class="mensaje-error-contra mensaje-activar">
+        {{message}}
+      </div>
+    {{/if}} --}}
+    <form
+      action="/links/edituser/contra/{{user.dni}}"
+      method="POST"
+      class="form-contraseña"
+    >
+      <div class="GrupoInput">
+        <label for="contra-actual">Digite su actual contraseña</label>
+        <input
+          class="Input"
+          type="password"
+          id="contraActual"
+          name="contraActual"
+          style="width: 100%;margin-left: 0"
+        />
+      </div>
+      <div class="GrupoInput">
+        <label for="contra-nueva">Digite su nueva contraseña</label>
+        <input
+          class="Input"
+          type="password"
+          id="contraNueva"
+          name="contraNueva"
+          style="width: 100%;margin-left: 0"
+        />
+      </div>
+      <div class="GrupoInput">
+        <label for="contra-confirmar">Confirme su nueva contraseña</label>
+        <input
+          class="Input"
+          type="password"
+          id="contraConfirmar"
+          name="contraConfirmar"
+          style="width: 100%;margin-left: 0"
+        />
+      </div>
+      <button class="btn-nueva-contra">Cambiar Contraseña</button>
+    </form>
+  </div>
+</div>
+
+<script src="/js/modificar.js"></script>

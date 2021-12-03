@@ -30,9 +30,7 @@ passport.use(
       passReqToCallback: true,
     },
     async (req, correo_electronico, password, done) => {
-      //console.log(req.body);
       const rows = await pool.query(
-        /*"SELECT * FROM persona where correo_electronico=?",*/
         "select p.dni, p.nombre, p.apellidoPaterno, p.apellidoMaterno, p.direccion, p.telefono, p.correo_electronico, p.password, p.genero, DATE_format(p.fecha_nac, '%Y-%m-%d') as fecha, pa.des_pais as aea, r.des_region, d.id_distrito, d.des_distrito from persona p inner join pais pa on p.id_pais = pa.id_pais inner join region r on p.id_region = r.id_region inner join distrito d on p.id_distrito = d.id_distrito where correo_electronico=?",
         [correo_electronico]
       );

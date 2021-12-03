@@ -4,6 +4,10 @@ const pool = require("../database");
 const { isLoggedIn } = require("../lib/auth");
 const helpers = require("../lib/helpers");
 
+const expresiones = {
+  password: /^.{4,10}$/, // 4 a 10 digitos.
+};
+
 router.get("/add", isLoggedIn, (req, res) => {
   res.render("links/add");
 });
@@ -81,7 +85,7 @@ router.post("/editbook/:idLibro", isLoggedIn, async (req, res) => {
   res.redirect("/links/mislibros");
 });
 
-router.get("/edituser/:dni", isLoggedIn, async (req, res) => {
+router.get("/edituser/datos/:dni", isLoggedIn, async (req, res) => {
   const { dni } = req.params;
   const user = await pool.query("select*from persona where dni=?", [dni]);
   const distrito = await pool.query(
@@ -90,7 +94,7 @@ router.get("/edituser/:dni", isLoggedIn, async (req, res) => {
   res.render("links/modificarperfil", { edituser: user[0], distrito });
 });
 
-router.post("/edituser/:dni", isLoggedIn, async (req, res) => {
+router.post("/edituser/datos/:dni", isLoggedIn, async (req, res) => {
   try {
     const { dni } = req.params;
     const {
@@ -126,8 +130,8 @@ router.post("/edituser/:dni", isLoggedIn, async (req, res) => {
       id_distrito,
     };
 
-    /* console.log(actDatosUser);
-    console.log(dni); */
+    console.log(actDatosUser);
+    console.log(dni);
 
     /* await pool.query("UPDATE persona SET nombre=? WHERE dni=?", [
       nombre,
@@ -139,6 +143,46 @@ router.post("/edituser/:dni", isLoggedIn, async (req, res) => {
   } catch (e) {
     console.log(e);
   }
+});
+
+router.post("/edituser/contra/:dni", isLoggedIn, async (req, res) => {
+  const { dni } = req.params;
+  const { contraActual, contraNueva, contraConfirmar } = req.body;
+
+  const row = await pool.query("SELECT * FROM persona WHERE dni=?", [dni]);
+
+  const user = row[0];
+
+  const validarPassword = await helpers.comparaPassword(
+    contraActual,
+    user.password
+  );
+
+  if (validarPassword) {
+    if (expresiones.password.test(contraNueva)) {
+      if (contraNueva === contraConfirmar) {
+        /* const contraEncriptada = await helpers.encryptPassword(contraNueva);
+        await pool.query("UPDATE persona SET password=? WHERE dni=?", [
+          contraEncriptada,
+          dni,
+        ]);
+        console.log(contraEncriptada); */
+        req.flash("success", "Contraseña actualizada satisfactoriamente");
+        console.log("Exito");
+      } else {
+        req.flash("message", "Las contraseñas no son iguales");
+        console.log("Las contraseñas no son iguales");
+      }
+    } else {
+      req.flash("message", "Error en los campos");
+      console.log("Error en los campos");
+    }
+  } else {
+    req.flash("message", "La contraseña actual no coincide");
+    console.log("La contraseña actual no coincide");
+  }
+
+  res.redirect("back");
 });
 
 module.exports = router;

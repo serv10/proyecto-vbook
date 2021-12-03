@@ -3,6 +3,7 @@
   width: 90%;
   display: flex;
   margin: auto;
+  height: 1200px;
 }
 
 .ContDatosIzq {
@@ -107,14 +108,9 @@
   width: 40%;
   font-weight: 900;
   font-size: 1.25rem;
-  line-height: 23px;
-  text-decoration: none;
   color: white;
-  text-align: center;
-  margin: auto 0;
   border-radius: 10px;
   margin-top: 50px;
-  margin-bottom: 150px;
 }
 
 .GrupoInfoPersonal {
@@ -158,6 +154,21 @@
   line-height: 23px;
   margin-bottom: 10px;
   color: rgba(0, 0, 0, 0.79);
+}
+
+.btn-cambiar-contra {
+  position: relative;
+  left: 40%;
+  transform: translateX(-40%);
+  background-color: #36a7f7;
+  height: 40px;
+  cursor: pointer;
+  border: none;
+  font-weight: 400;
+  font-size: 1.1rem;
+  color: white;
+  border-radius: 10px;
+  width: 40%;
 }
 
 .Input {
@@ -292,16 +303,100 @@ h2 {
   justify-content: center;
 }
 
-.mensaje {
+.mensaje-exito,
+.mensaje-error {
   position: relative;
   font-size: 1.2rem;
-  color: #1ed12d;
   font-weight: 700;
   margin-left: 30%;
   margin-top: 1.5rem;
   display: none;
 }
 
+.mensaje-exito {
+  color: #1ed12d;
+}
+
+.mensaje-error {
+  color: #bb2929;
+}
+
 .mensaje-activar {
   display: block;
+}
+
+.modal-contenedor {
+  opacity: 0;
+  visibility: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  width: 35%;
+  height: 65%;
+  background: #e1e8e9;
+  border-radius: 10px;
+  transform: translateY(0%);
+  transition: transform 0.7s;
+}
+
+.modal-close {
+  transform: translateY(-200%);
+}
+
+.cerrar {
+  text-align: right;
+  font-weight: 900;
+  font-size: 1.5rem;
+  margin-right: 15px;
+  padding-top: 8px;
+  cursor: pointer;
+}
+
+.btn-nueva-contra {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #36a7f7;
+  height: 35px;
+  cursor: pointer;
+  border: none;
+  font-weight: 400;
+  font-size: 1.1rem;
+  color: white;
+  border-radius: 10px;
+  width: 50%;
+  margin-top: 10px;
+}
+
+.form-contraseña {
+  width: 75%;
+  margin: 0 auto;
+  margin-top: 1.2rem;
+}
+
+.mensaje-exito-contra,
+.mensaje-error-contra {
+  text-align: center;
+  font-size: 1.2rem;
+  position: relative;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-top: 1rem;
+}
+
+.mensaje-exito-contra {
+  color: #1ed12d;
+}
+
+.mensaje-error-contra {
+  color: #bb2929;
 }
