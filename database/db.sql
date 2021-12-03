@@ -154,4 +154,23 @@ primary key (idDenuncia),
 foreign key (idLibro) references libro(idLibro),
 foreign key (dni) references persona(dni));
 
+------------------------------------- NUEVAS TABLAS  CREATE TABLE IMAGENLIBRO, REDESSOCIALES, AYUDA
+create table UsuarioRedSocial(
+dni char(8) not null,
+link_wsp varchar(200),
+link_fb varchar(200),
+link_twt varchar(200),
+link_ig varchar(200),
+link_wtp varchar(200),
+foreign key (dni) references persona(dni));
 
+create table ImagenLibro(
+idLibro int not null,
+imagen blob not null,
+foreign key (idLibro) references Libro(idLibro));
+
+create table Ayuda(
+idAyuda int not null,
+mensaje varchar (500) not null,
+dni char(8) not null,
+foreign key (dni) references persona(dni));
