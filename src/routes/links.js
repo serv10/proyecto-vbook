@@ -3,6 +3,7 @@ const router = express.Router();
 const pool = require("../database");
 const { isLoggedIn } = require("../lib/auth");
 const helpers = require("../lib/helpers");
+const path = require("path");
 
 const expresiones = {
   password: /^.{4,10}$/, // 4 a 10 digitos.
@@ -95,54 +96,78 @@ router.get("/edituser/datos/:dni", isLoggedIn, async (req, res) => {
 });
 
 router.post("/edituser/datos/:dni", isLoggedIn, async (req, res) => {
-  try {
-    const { dni } = req.params;
-    const {
-      nombre,
-      apellidoPaterno,
-      apellidoMaterno,
-      direccion,
-      telefono,
-      correo_electronico,
-      genero,
-      fecha_nac,
-      foto = "",
-      id_pais = 1,
-      id_region = 1,
-      id_distrito,
-    } = req.body;
+  const { dni } = req.params;
+  const {
+    nombre,
+    apellidoPaterno,
+    apellidoMaterno,
+    direccion,
+    telefono,
+    correo_electronico,
+    genero,
+    fecha_nac,
+    wsp,
+    twt,
+    ig,
+    fb,
+    wtp,
+    usuario,
+    id_pais = 1,
+    id_region = 1,
+    id_distrito,
+  } = req.body;
 
-    /* var { password = "123456" } = req.body;
-    password = await helpers.encryptPassword(password); */
+  const actDatosUser = {
+    nombre,
+    apellidoPaterno,
+    apellidoMaterno,
+    direccion,
+    telefono,
+    correo_electronico,
+    genero,
+    fecha_nac,
+    id_pais,
+    id_region,
+    id_distrito,
+    usuario,
+  };
 
-    const actDatosUser = {
-      nombre,
-      apellidoPaterno,
-      apellidoMaterno,
-      direccion,
-      telefono,
-      correo_electronico,
-      genero,
-      fecha_nac,
-      foto,
-      id_pais,
-      id_region,
-      id_distrito,
-    };
+  const linksUser = {
+    wsp,
+    twt,
+    ig,
+    fb,
+    wtp,
+  };
 
-    console.log(actDatosUser);
-    console.log(dni);
+  let foto;
+  let subirDireccion;
 
-    /* await pool.query("UPDATE persona SET nombre=? WHERE dni=?", [
+  if (req.files && Object.keys(req.files).length != 0) {
+    foto = req.files.foto;
+    subirDireccion = path.join(__dirname, "../", "public", "upload", foto.name);
+
+    foto.mv(subirDireccion, async () => {
+      await pool.query("UPDATE persona SET foto=? WHERE dni=?", [
+        foto.name,
+        dni,
+      ]);
+    });
+  }
+
+  /* console.log(actDatosUser);
+  console.log(linksUser);
+
+  /* console.log(actDatosUser);
+    console.log(dni); */
+
+  /* await pool.query("UPDATE persona SET nombre=? WHERE dni=?", [
       nombre,
       req.params.dni,
     ]);
     */
-    req.flash("message", "Datos actualizados satisfactoriamente");
-    res.redirect(dni);
-  } catch (e) {
-    console.log(e);
-  }
+  /* req.flash("message", "Datos actualizados satisfactoriamente"); */
+  res.redirect(dni);
 });
 
 router.post("/edituser/contra/:dni", isLoggedIn, async (req, res) => {

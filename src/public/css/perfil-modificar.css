@@ -28,18 +28,20 @@
   border-radius: 10px;
 }
 
-.DivImg button {
-  background: #36a7f7;
-  border-radius: 20px;
-  width: 80%;
-  color: white;
-  text-align: center;
-  margin: 15px auto;
-  border: none;
-  cursor: pointer;
-  font-size: 1.2rem;
-  height: 25px;
+.DivImg label {
   font-weight: 900;
+  font-size: 23px;
+  line-height: 27px;
+  color: rgba(27, 27, 27, 0.76);
+  margin-bottom: 15px;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.DivImg input {
+  margin-bottom: 2rem;
+  font-size: 0.93rem;
+  color: rgba(0, 0, 0, 0.79);
 }
 
 .Img {

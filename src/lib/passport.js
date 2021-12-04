@@ -31,7 +31,7 @@ passport.use(
     },
     async (req, correo_electronico, password, done) => {
       const rows = await pool.query(
-        "select p.dni, p.nombre, p.apellidoPaterno, p.apellidoMaterno, p.direccion, p.telefono, p.correo_electronico, p.password, p.genero, DATE_format(p.fecha_nac, '%Y-%m-%d') as fecha, pa.des_pais as aea, r.des_region, d.id_distrito, d.des_distrito from persona p inner join pais pa on p.id_pais = pa.id_pais inner join region r on p.id_region = r.id_region inner join distrito d on p.id_distrito = d.id_distrito where correo_electronico=?",
+        "SELECT p.dni, p.nombre, p.apellidoPaterno, p.apellidoMaterno, p.direccion, p.telefono, p.correo_electronico, p.password, p.genero,p.foto,p.usuario, DATE_format(p.fecha_nac, '%Y-%m-%d') as fecha, pa.des_pais as pais, r.des_region, d.id_distrito, d.des_distrito,rs.link_wsp,rs.link_wsp as wsp,rs.link_fb as fb,rs.link_twt as twt,rs.link_ig as ig,rs.link_wtp as wtp fROM persona p INNER JOIN pais pa ON p.id_pais = pa.id_pais INNER JOIN region r ON p.id_region = r.id_region INNER JOIN distrito d ON p.id_distrito = d.id_distrito INNER JOIN UsuarioRedSocial rs ON p.dni = rs.dni WHERE correo_electronico=?",
         [correo_electronico]
       );
       if (rows.length > 0) {
@@ -111,6 +111,9 @@ passport.use(
         else {
           nuevoUsuario.password = await helpers.encryptPassword(password);
           await pool.query("INSERT INTO PERSONA SET ?", [nuevoUsuario]);
+          await pool.query("INSERT INTO UsuarioRedSocial (dni) VALUES (?)", [
+            nuevoUsuario.dni,
+          ]);
           return done(null, nuevoUsuario);
         }
       } else
@@ -133,7 +136,7 @@ passport.serializeUser((usuario, done) => {
 passport.deserializeUser(async (dni, done) => {
   /*const fila = await pool.query("SELECT * FROM PERSONA WHERE DNI=?", [dni]);*/
   const fila = await pool.query(
-    "select p.dni, p.nombre, p.apellidoPaterno, p.apellidoMaterno, p.direccion, p.telefono, p.correo_electronico, p.password, p.genero, DATE_format(p.fecha_nac, '%Y-%m-%d') as fecha, pa.des_pais, r.des_region, d.id_distrito as codigodistrito, d.des_distrito as distrito from persona p inner join pais pa on p.id_pais = pa.id_pais inner join region r on p.id_region = r.id_region inner join distrito d on p.id_distrito = d.id_distrito where p.dni = ?",
+    "SELECT p.dni, p.nombre, p.apellidoPaterno, p.apellidoMaterno, p.direccion, p.telefono, p.correo_electronico, p.password, p.genero, p.foto,p.usuario, DATE_format(p.fecha_nac, '%Y-%m-%d') as fecha, pa.des_pais, r.des_region, d.id_distrito as codigodistrito, d.des_distrito as distrito, rs.link_wsp as wsp,rs.link_fb as fb,rs.link_twt as twt,rs.link_ig as ig,rs.link_wtp as wtp FROM persona p INNER JOIN pais pa ON p.id_pais = pa.id_pais INNER JOIN region r ON p.id_region = r.id_region INNER JOIN distrito d ON p.id_distrito = d.id_distrito INNER JOIN UsuarioRedSocial rs ON p.dni = rs.dni WHERE p.dni = ?",
     [dni]
   );
   done(null, fila[0]);
