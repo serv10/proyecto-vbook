@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="/css/perfil-modificar.css" />
 
-{{!-- {{> barra}} --}}
+{{> barra}}
 
 <div class="DivCont">
   <form
@@ -276,7 +276,7 @@
               {{#each distrito}}
                 <option
                   value="{{id_distrito}}"
-                  {{!-- {{selected id_distrito ../user.codigodistrito}} --}}
+                  {{selected id_distrito ../user.codigodistrito}}
                 >
                   {{des_distrito}}
                 </option>

@@ -100,29 +100,31 @@ passport.use(
         )
       )
         return done(null, false, req.flash("message", "Campos erróneos"));
-      else if (password === password2) {
-        if (rows.length > 0)
+      else if (rows.length == 0) {
+        if (password !== password2)
           return done(
             null,
             false,
-            req.flash("message", "Correo electronico o DNI ya existen")
+            req.flash(
+              "message",
+              "Las contraseñas ingresadas no coinciden entre sí"
+            )
           );
         else {
           nuevoUsuario.password = await helpers.encryptPassword(password);
+
           await pool.query("INSERT INTO PERSONA SET ?", [nuevoUsuario]);
           await pool.query("INSERT INTO UsuarioRedSocial (dni) VALUES (?)", [
             nuevoUsuario.dni,
           ]);
+
           return done(null, nuevoUsuario);
         }
       } else
         return done(
           null,
           false,
-          req.flash(
-            "message",
-            "Las contraseñas ingresadas no coinciden entre sí"
-          )
+          req.flash("message", "Correo electronico o DNI ya existen")
         );
     }
   )
