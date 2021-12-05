@@ -4,9 +4,9 @@ const{database} = require("./keys");
 
 const pool = mysql.createPool(database);
 pool.getConnection((err, connection) =>{
-    if(err){
+    if(err){ //si hay un error de conexión en la bd
         if(err.code === 'PROTOCOL_CONNECTION_CLOSE'){
-            console.error('Base de ddatos cerrada');
+            console.error('Base de datos cerrada'); 
         }
         if(err.code === 'ER_CON_COUNT_ERROR'){
             console.error('MUCHAS CONEXIONES A LA BASE DE DATOS');
@@ -16,9 +16,9 @@ pool.getConnection((err, connection) =>{
         }
     }
 
-    if (connection) connection.release();
+    if (connection) connection.release(); //en caso exista conexión, establecerla
     console.log('La base de datos está conectada');
-    return;
+    //return;
 })
 
 //Convirtiendo promesas
