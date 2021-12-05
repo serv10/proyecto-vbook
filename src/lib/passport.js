@@ -7,7 +7,6 @@ const handlebars = require("handlebars");
 
 const expresiones = {
   nombre: /^[a-zA-ZÀ-ÿ\s]{1,50}$/, // Letras y espacios, pueden llevar acentos.
-  apellido: /^[a-zA-ZÀ-ÿ\s]{1,50}$/, // Letras y espacios, pueden llevar acentos.
   password: /^.{4,10}$/, // 4 a 10 digitos.
   correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
   dni: /^[0-9]{8}$/, // 8 digitos.
@@ -94,7 +93,7 @@ passport.use(
       if (
         !(
           expresiones.nombre.test(nombre) &&
-          expresiones.apellido.test(apellidoPaterno) &&
+          expresiones.nombre.test(apellidoPaterno) &&
           expresiones.password.test(password) &&
           expresiones.correo.test(correo_electronico) &&
           expresiones.dni.test(dni)

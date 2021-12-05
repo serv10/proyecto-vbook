@@ -6,7 +6,13 @@ const helpers = require("../lib/helpers");
 const path = require("path");
 
 const expresiones = {
-  password: /^.{4,10}$/, // 4 a 10 digitos.
+  nombre: /^[a-zA-ZÀ-ÿ\s]{1,50}$/,
+  apellidos: /^[a-zA-ZÀ-ÿ\s]{0,50}$/,
+  password: /^.{4,10}$/,
+  correo: /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+  direccion: /^[a-zA-ZÀ-ÿ0-9.#-_\s]{0,100}$/,
+  celular: /^[0-9]{9}$/,
+  usuario: /^[a-zA-Z0-9-_]{4,12}$/,
 };
 
 router.get("/add", isLoggedIn, (req, res) => {
@@ -97,6 +103,7 @@ router.get("/edituser/datos/:dni", isLoggedIn, async (req, res) => {
 
 router.post("/edituser/datos/:dni", isLoggedIn, async (req, res) => {
   const { dni } = req.params;
+
   const {
     nombre,
     apellidoPaterno,
@@ -106,39 +113,14 @@ router.post("/edituser/datos/:dni", isLoggedIn, async (req, res) => {
     correo_electronico,
     genero,
     fecha_nac,
+    usuario,
+    id_distrito,
     wsp,
     twt,
     ig,
     fb,
     wtp,
-    usuario,
-    id_pais = 1,
-    id_region = 1,
-    id_distrito,
   } = req.body;
-
-  const actDatosUser = {
-    nombre,
-    apellidoPaterno,
-    apellidoMaterno,
-    direccion,
-    telefono,
-    correo_electronico,
-    genero,
-    fecha_nac,
-    id_pais,
-    id_region,
-    id_distrito,
-    usuario,
-  };
-
-  const linksUser = {
-    wsp,
-    twt,
-    ig,
-    fb,
-    wtp,
-  };
 
   let foto;
   let subirDireccion;
@@ -155,18 +137,42 @@ router.post("/edituser/datos/:dni", isLoggedIn, async (req, res) => {
     });
   }
 
-  /* console.log(actDatosUser);
-  console.log(linksUser);
+  if (
+    expresiones.nombre.test(nombre) &&
+    expresiones.nombre.test(apellidoPaterno) &&
+    expresiones.apellidos.test(apellidoMaterno) &&
+    expresiones.correo.test(correo_electronico) &&
+    expresiones.direccion.test(direccion) &&
+    (telefono.length == 0 || expresiones.celular.test(telefono)) &&
+    (usuario.length == 0 || expresiones.usuario.test(usuario))
+  ) {
+    await pool.query(
+      "update persona set nombre=?,apellidoPaterno=?,apellidoMaterno=?,direccion=?,telefono=?,correo_electronico=?,genero=?,usuario=?,fecha_nac=?,id_distrito=? where dni = ?",
+      [
+        nombre,
+        apellidoPaterno,
+        apellidoMaterno,
+        direccion,
+        telefono,
+        correo_electronico,
+        genero,
+        usuario,
+        fecha_nac,
+        id_distrito,
+        dni,
+      ]
+    );
 
-  /* console.log(actDatosUser);
-    console.log(dni); */
+    await pool.query(
+      "update usuarioredsocial set link_wsp=?,link_fb=?,link_twt=?,link_ig=?,link_wtp=? where dni = ?",
+      [wsp, twt, ig, fb, wtp, dni]
+    );
 
-  /* await pool.query("UPDATE persona SET nombre=? WHERE dni=?", [
-      nombre,
-      req.params.dni,
-    ]);
-    */
-  /* req.flash("message", "Datos actualizados satisfactoriamente"); */
+    req.flash("success", "Datos actualizados satisfactoriamente");
+  } else {
+    req.flash("message", "Error en algunos de los campos");
+  }
+
   res.redirect(dni);
 });
 

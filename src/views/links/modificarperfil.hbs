@@ -8,6 +8,7 @@
     action="/links/edituser/datos/{{user.dni}}"
     method="POST"
     encType="multipart/form-data"
+    id="form-modificar"
   >
     <div class="ContDatosIzq">
       <div class="DivImg">
@@ -105,6 +106,7 @@
           {{success}}
         </div>
       {{/if}}
+
       {{#if message}}
         <div id="message" class="mensaje-error mensaje-activar">
           {{message}}
@@ -115,71 +117,95 @@
         <div class="GrupoInfoPersonal">
           <h2>Información Personal</h2>
 
-          <div class="GrupoInput">
+          <div id="grupo__nombre" class="GrupoInput">
             <label for="nombres">Nombres</label>
-            <input
-              class="Input"
-              type="text"
-              id="nombre"
-              name="nombre"
-              placeholder="Ingrese su nombre"
-              required
-              value="{{user.nombre}}"
-            />
+            <div class="formulario__grupo-input">
+              <input
+                class="Input"
+                type="text"
+                id="nombre"
+                name="nombre"
+                placeholder="Ingrese su nombre"
+                required
+                value="{{user.nombre}}"
+              />
+              <i class="formulario__validacion-estado fas fa-times-circle"></i>
+            </div>
+            <p class="formulario__input-error">El nombre no debe exceder los 50
+              digitos</p>
           </div>
 
-          <div class="GrupoInput">
+          <div id="grupo__apellidoPaterno" class="GrupoInput">
             <label for="apellidoP">Apellido Paterno</label>
-            <input
-              class="Input"
-              type="text"
-              id="apellidoPaterno"
-              name="apellidoPaterno"
-              placeholder="Ingrese su apellido paterno"
-              required
-              value="{{user.apellidoPaterno}}"
-            />
+            <div class="formulario__grupo-input">
+              <input
+                class="Input"
+                type="text"
+                id="apellidoPaterno"
+                name="apellidoPaterno"
+                placeholder="Ingrese su apellido paterno"
+                required
+                value="{{user.apellidoPaterno}}"
+              />
+              <i class="formulario__validacion-estado fas fa-times-circle"></i>
+            </div>
+            <p class="formulario__input-error">El apellido paterno no debe
+              exceder los 50 digitos</p>
           </div>
 
-          <div class="GrupoInput">
+          <div id="grupo__apellidoMaterno" class="GrupoInput">
             <label for="apellidoM">Apellido Materno</label>
-            <input
-              class="Input"
-              type="text"
-              id="apellidoMaterno"
-              name="apellidoMaterno"
-              placeholder="Ingrese su apellido materno"
-              value="{{user.apellidoMaterno}}"
-            />
+            <div class="formulario__grupo-input">
+              <input
+                class="Input"
+                type="text"
+                id="apellidoMaterno"
+                name="apellidoMaterno"
+                placeholder="Ingrese su apellido materno"
+                value="{{user.apellidoMaterno}}"
+              />
+              <i class="formulario__validacion-estado fas fa-times-circle"></i>
+            </div>
+            <p class="formulario__input-error">El apellido materno no debe
+              exceder los 50 digitos</p>
           </div>
 
-          <div class="GrupoInput">
+          <div id="grupo__celular" class="GrupoInput">
             <label for="celular">Número Celular</label>
-            <input
-              class="Input"
-              type="tel"
-              id="celular"
-              name="telefono"
-              placeholder="Ingrese su número de teléfono"
-              value="{{user.telefono}}"
-            />
+            <div class="formulario__grupo-input">
+              <input
+                class="Input"
+                type="tel"
+                id="celular"
+                name="telefono"
+                placeholder="Ingrese su número de teléfono"
+                value="{{user.telefono}}"
+              />
+              <i class="formulario__validacion-estado fas fa-times-circle"></i>
+            </div>
+            <p class="formulario__input-error">El número celular debe tener 9
+              dígitos</p>
           </div>
 
           <div class="GrupoInput" style="margin-bottom: 0;">
             <label style="margin-bottom: 1rem">Género</label>
-            <label style="margin-bottom: 1.3rem"><input
+            <label style="display: flex; gap: 10px; align-items: center;"><input
                 type="radio"
                 name="genero"
                 value="Masculino"
                 {{checked user.genero "Masculino"}}
               />Masculino</label>
-            <label style="margin-bottom: 1.3rem"><input
+            <label
+              style="display: flex;  gap: 10px; align-items: center;"
+            ><input
                 type="radio"
                 name="genero"
                 value="Femenino"
                 {{checked user.genero "Femenino"}}
               />Femenino</label>
-            <label style="margin-bottom:1.3rem"><input
+            <label
+              style="display: flex; gap: 10px; align-items: center;margin-bottom: 1rem;"
+            ><input
                 type="radio"
                 name="genero"
                 value="Otro"
@@ -202,29 +228,39 @@
         <div class="GrupoInfoCuenta">
           <h2>Información de la cuenta</h2>
 
-          <div class="GrupoInput">
+          <div id="grupo__usuario" class="GrupoInput">
             <label for="usuario">Usuario</label>
-            <input
-              class="Input"
-              type="text"
-              id="usuario"
-              name="usuario"
-              placeholder="Ingrese su usuario"
-              value="{{user.usuario}}"
-            />
+            <div class="formulario__grupo-input">
+              <input
+                class="Input"
+                type="text"
+                id="usuario"
+                name="usuario"
+                placeholder="Ingrese su usuario"
+                value="{{user.usuario}}"
+              />
+              <i class="formulario__validacion-estado fas fa-times-circle"></i>
+            </div>
+            <p class="formulario__input-error">El usuario debe tener entre 4 a
+              12 dígitos</p>
           </div>
 
-          <div class="GrupoInput">
+          <div id="grupo__correo" class="GrupoInput">
             <label for="correo">Correo</label>
-            <input
-              class="Input"
-              type="email"
-              id="correo"
-              name="correo_electronico"
-              placeholder="Ingrese su email"
-              required
-              value="{{user.correo_electronico}}"
-            />
+            <div class="formulario__grupo-input">
+              <input
+                class="Input"
+                type="email"
+                id="correo"
+                name="correo_electronico"
+                placeholder="Ingrese su email"
+                required
+                value="{{user.correo_electronico}}"
+              />
+              <i class="formulario__validacion-estado fas fa-times-circle"></i>
+            </div>
+            <p class="formulario__input-error">El correo solo puede contener
+              letras, numeros, puntos, guiones y guion bajo</p>
           </div>
 
           <div class="GrupoInput">
@@ -240,7 +276,7 @@
               {{#each distrito}}
                 <option
                   value="{{id_distrito}}"
-                  {{selected id_distrito ../user.codigodistrito}}
+                  {{!-- {{selected id_distrito ../user.codigodistrito}} --}}
                 >
                   {{des_distrito}}
                 </option>
@@ -248,16 +284,21 @@
             </select>
           </div>
 
-          <div class="GrupoInput">
+          <div id="grupo__direccion" class="GrupoInput">
             <label for="direc">Dirección</label>
-            <input
-              class="Input"
-              type="text"
-              id="direccion"
-              name="direccion"
-              placeholder="Ingrese su dirección"
-              value="{{user.direccion}}"
-            />
+            <div class="formulario__grupo-input">
+              <input
+                class="Input"
+                type="text"
+                id="direccion"
+                name="direccion"
+                placeholder="Ingrese su dirección"
+                value="{{user.direccion}}"
+              />
+              <i class="formulario__validacion-estado fas fa-times-circle"></i>
+            </div>
+            <p class="formulario__input-error">La dirección puede tener punto,
+              simbolo numeral, guion y guion bajo</p>
           </div>
 
         </div>
@@ -286,6 +327,7 @@
         {{message}}
       </div>
     {{/if}} --}}
+
     <form
       action="/links/edituser/contra/{{user.dni}}"
       method="POST"
