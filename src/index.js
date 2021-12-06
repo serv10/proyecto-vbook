@@ -74,3 +74,7 @@ app.get("/ayuda", (req, res) => {
 app.get("/denunciar", (req, res) => {
   res.render("denunciar");
 });
+
+app.get("/publicar", (req, res) => {
+  res.render("publicar");
+});
