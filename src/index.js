@@ -8,13 +8,14 @@ const mysqlstore = require("express-mysql-session");
 const passport = require("passport");
 const { database } = require("./keys");
 const swal = require("sweetalert2");
+const fileUpload = require("express-fileupload");
 
 //inicializaciones
 const app = express();
 require("./lib/passport");
+app.use(fileUpload());
 
-//configuraciones ddel servidor
-
+//configuraciones del servidor
 app.set("port", process.env.PORT || 4000);
 app.set("views", path.join(__dirname, "views"));
 app.engine(
@@ -48,6 +49,7 @@ app.use(passport.session());
 //variable globales
 app.use((req, res, next) => {
   app.locals.message = req.flash("message");
+  app.locals.success = req.flash("success");
   app.locals.user = req.user;
   next();
 });
@@ -56,8 +58,6 @@ app.use((req, res, next) => {
 app.use(require("./routes"));
 app.use(require("./routes/authentication"));
 app.use("/links", require("./routes/links"));
-
-//POST '/links/';
 
 //archivos publicos
 app.use(express.static(path.join(__dirname, "public")));

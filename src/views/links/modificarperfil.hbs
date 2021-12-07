@@ -1,115 +1,84 @@
 <link rel="stylesheet" href="/css/perfil-modificar.css" />
+
 {{> barra}}
+
 <div class="DivCont">
-
-  <div class="ContDatosIzq">
-    <div class="DivImg">
-      <figure>
-        <img class="Img" src="/img/messi.jpg" alt="Foto Perfil" />
-      </figure>
-      <button>Editar Foto</button>
-    </div>
-
-    <div class="GrupoContacto">
-      <h2>Contactos</h2>
-
-      <div class="Contactos">
-        <figure>
-          <img class="Img" src="/img/wsp.png" alt="WhatsApp" />
-        </figure>
-        <input class="Enlaces" type="url" placeholder="link de WhatsApp" />
-      </div>
-
-      <div class="Contactos">
-        <figure>
-          <img class="Img" src="/img/twitter.jpg" alt="Twitter" />
-        </figure>
-        <input class="Enlaces" type="url" placeholder="link de Twitter" />
-      </div>
-
-      <div class="Contactos">
-        <figure>
-          <img class="Img" src="/img/instagram.png" alt="Instagram" />
-        </figure>
-        <input class="Enlaces" type="url" placeholder="link de Instagram" />
-      </div>
-
-      <div class="Contactos">
-        <figure>
-          <img class="Img" src="/img/fb.png" alt="Facebook" />
-        </figure>
-        <input class="Enlaces" type="url" placeholder="link de Facebook" />
-      </div>
-
-      <div class="Contactos">
-        <figure>
-          <img class="Img" src="/img/watt.png" alt="Wattpad" />
-        </figure>
-        <input class="Enlaces" type="url" placeholder="link de Wattpad" />
-      </div>
-    </div>
-
-  </div>
-
   <form
-    class="ContDatosDer"
-    action="/links/edituser/{{user.dni}}"
+    style="display:flex"
+    action="/links/edituser/datos/{{user.dni}}"
     method="POST"
+    encType="multipart/form-data"
+    id="form-modificar"
   >
-
-    <h1>{{user.nombre}} {{user.apellidoPaterno}} {{user.apellidoMaterno}}</h1>
-
-    {{#if message}}
-      <div id="message" class="mensaje">
-        {{message}}
+    <div class="ContDatosIzq">
+      <div class="DivImg">
+        <figure>
+          {{#if user.foto}}
+            <img class="Img" src="/upload/{{user.foto}}" alt="Foto Perfil" />
+          {{else}}
+            <img class="Img" src="/img/default.jpg" alt="Foto Perfil" />
+          {{/if}}
+        </figure>
+        <label for="foto">Editar Foto</label>
+        <input type="file" name="foto" id="foto" accept="image/*" />
       </div>
-    {{/if}}
 
-    <div class="GrupoDatosModificar">
-      <div class="GrupoInfoPersonal">
-        <h2>Información Personal</h2>
+      <div class="GrupoContacto">
+        <h2>Contactos</h2>
 
-        <div class="GrupoInput">
-          <label for="nombres">Nombres</label>
+        <div class="Contactos">
+          <figure>
+            <img class="Img" src="/img/wsp.png" alt="WhatsApp" />
+          </figure>
           <input
-            class="Input"
-            type="text"
-            id="nombre"
-            name="nombre"
-            value="{{user.nombre}}"
+            class="Enlaces"
+            type="url"
+            placeholder="link de WhatsApp"
+            name="wsp"
+            id="wsp"
+            value="{{user.wsp}}"
           />
         </div>
 
-        <div class="GrupoInput">
-          <label for="apellidoP">Apellido Paterno</label>
+        <div class="Contactos">
+          <figure>
+            <img class="Img" src="/img/twitter.jpg" alt="Twitter" />
+          </figure>
           <input
-            class="Input"
-            type="text"
-            id="apellidoPaterno"
-            name="apellidoPaterno"
-            value="{{user.apellidoPaterno}}"
+            class="Enlaces"
+            type="url"
+            placeholder="link de Twitter"
+            name="twt"
+            id="twt"
+            value="{{user.twt}}"
           />
         </div>
 
-        <div class="GrupoInput">
-          <label for="apellidoM">Apellido Materno</label>
+        <div class="Contactos">
+          <figure>
+            <img class="Img" src="/img/instagram.png" alt="Instagram" />
+          </figure>
           <input
-            class="Input"
-            type="text"
-            id="apellidoMaterno"
-            name="apellidoMaterno"
-            value="{{user.apellidoMaterno}}"
+            class="Enlaces"
+            type="url"
+            placeholder="link de Instagram"
+            name="ig"
+            id="ig"
+            value="{{user.ig}}"
           />
         </div>
 
-        <div class="GrupoInput">
-          <label for="celular">Número Celular</label>
+        <div class="Contactos">
+          <figure>
+            <img class="Img" src="/img/fb.png" alt="Facebook" />
+          </figure>
           <input
-            class="Input"
-            type="tel"
-            id="celular"
-            name="telefono"
-            value="{{user.telefono}}"
+            class="Enlaces"
+            type="url"
+            placeholder="link de Facebook"
+            name="fb"
+            id="fb"
+            value="{{user.fb}}"
           />
         </div>
 
@@ -138,91 +107,285 @@
         <div class="GrupoInput">
           <label for="nacimiento">Fecha de Nacimiento</label>
           <input
-            class="Input"
-            type="date"
-            id="fecha_nacimiento"
-            name="fecha_nac"
-            value="{{user.fecha}}"
+            class="Enlaces"
+            type="url"
+            placeholder="link de Wattpad"
+            name="wtp"
+            id="wtp"
+            value="{{user.wtp}}"
           />
         </div>
       </div>
+    </div>
 
-      <div class="GrupoInfoCuenta">
-        <h2>Información de la cuenta</h2>
+    <div class="ContDatosDer">
+      <h1>{{user.nombre}} {{user.apellidoPaterno}} {{user.apellidoMaterno}}</h1>
 
-        <div class="GrupoInput">
-          <label for="usuario">Usuario</label>
-          <input
-            class="Input"
-            type="text"
-            id="usuario"
-            name="usuario"
-            value="{{user.nombre}} {{user.apellidoPaterno}} {{user.apellidoMaterno}}"
-          />
+      {{#if success}}
+        <div id="message" class="mensaje-exito mensaje-activar">
+          {{success}}
+        </div>
+      {{/if}}
+
+      {{#if message}}
+        <div id="message" class="mensaje-error mensaje-activar">
+          {{message}}
+        </div>
+      {{/if}}
+
+      <div class="GrupoDatosModificar">
+        <div class="GrupoInfoPersonal">
+          <h2>Información Personal</h2>
+
+          <div id="grupo__nombre" class="GrupoInput">
+            <label for="nombres">Nombres</label>
+            <div class="formulario__grupo-input">
+              <input
+                class="Input"
+                type="text"
+                id="nombre"
+                name="nombre"
+                placeholder="Ingrese su nombre"
+                required
+                value="{{user.nombre}}"
+              />
+              <i class="formulario__validacion-estado fas fa-times-circle"></i>
+            </div>
+            <p class="formulario__input-error">El nombre no debe exceder los 50
+              digitos</p>
+          </div>
+
+          <div id="grupo__apellidoPaterno" class="GrupoInput">
+            <label for="apellidoP">Apellido Paterno</label>
+            <div class="formulario__grupo-input">
+              <input
+                class="Input"
+                type="text"
+                id="apellidoPaterno"
+                name="apellidoPaterno"
+                placeholder="Ingrese su apellido paterno"
+                required
+                value="{{user.apellidoPaterno}}"
+              />
+              <i class="formulario__validacion-estado fas fa-times-circle"></i>
+            </div>
+            <p class="formulario__input-error">El apellido paterno no debe
+              exceder los 50 digitos</p>
+          </div>
+
+          <div id="grupo__apellidoMaterno" class="GrupoInput">
+            <label for="apellidoM">Apellido Materno</label>
+            <div class="formulario__grupo-input">
+              <input
+                class="Input"
+                type="text"
+                id="apellidoMaterno"
+                name="apellidoMaterno"
+                placeholder="Ingrese su apellido materno"
+                value="{{user.apellidoMaterno}}"
+              />
+              <i class="formulario__validacion-estado fas fa-times-circle"></i>
+            </div>
+            <p class="formulario__input-error">El apellido materno no debe
+              exceder los 50 digitos</p>
+          </div>
+
+          <div id="grupo__celular" class="GrupoInput">
+            <label for="celular">Número Celular</label>
+            <div class="formulario__grupo-input">
+              <input
+                class="Input"
+                type="tel"
+                id="celular"
+                name="telefono"
+                placeholder="Ingrese su número de teléfono"
+                value="{{user.telefono}}"
+              />
+              <i class="formulario__validacion-estado fas fa-times-circle"></i>
+            </div>
+            <p class="formulario__input-error">El número celular debe tener 9
+              dígitos</p>
+          </div>
+
+          <div class="GrupoInput" style="margin-bottom: 0;">
+            <label style="margin-bottom: 1rem">Género</label>
+            <label style="display: flex; gap: 10px; align-items: center;"><input
+                type="radio"
+                name="genero"
+                value="Masculino"
+                {{checked user.genero "Masculino"}}
+              />Masculino</label>
+            <label
+              style="display: flex;  gap: 10px; align-items: center;"
+            ><input
+                type="radio"
+                name="genero"
+                value="Femenino"
+                {{checked user.genero "Femenino"}}
+              />Femenino</label>
+            <label
+              style="display: flex; gap: 10px; align-items: center;margin-bottom: 1rem;"
+            ><input
+                type="radio"
+                name="genero"
+                value="Otro"
+                {{checked user.genero "Otro"}}
+              />Otro</label>
+          </div>
+
+          <div class="GrupoInput">
+            <label for="nacimiento">Fecha de Nacimiento</label>
+            <input
+              class="Input"
+              type="date"
+              id="fecha_nacimiento"
+              name="fecha_nac"
+              value="{{user.fecha}}"
+            />
+          </div>
         </div>
 
-        <div class="GrupoInput">
-          <label for="correo">Correo</label>
-          <input
-            class="Input"
-            type="email"
-            id="correo"
-            name="correo_electronico"
-            value="{{user.correo_electronico}}"
-          />
-        </div>
+        <div class="GrupoInfoCuenta">
+          <h2>Información de la cuenta</h2>
 
-        <div class="GrupoInput">
-          <label for="contra">Contraseña</label>
-          <input
-            class="Input"
-            type="password"
-            id="contra"
-            name="password"
-            value="{{user.password}}"
-          />
-        </div>
+          <div id="grupo__usuario" class="GrupoInput">
+            <label for="usuario">Usuario</label>
+            <div class="formulario__grupo-input">
+              <input
+                class="Input"
+                type="text"
+                id="usuario"
+                name="usuario"
+                placeholder="Ingrese su usuario"
+                value="{{user.usuario}}"
+              />
+              <i class="formulario__validacion-estado fas fa-times-circle"></i>
+            </div>
+            <p class="formulario__input-error">El usuario debe tener entre 4 a
+              12 dígitos</p>
+          </div>
 
-        <h2>Dirección</h2>
+          <div id="grupo__correo" class="GrupoInput">
+            <label for="correo">Correo</label>
+            <div class="formulario__grupo-input">
+              <input
+                class="Input"
+                type="email"
+                id="correo"
+                name="correo_electronico"
+                placeholder="Ingrese su email"
+                required
+                value="{{user.correo_electronico}}"
+              />
+              <i class="formulario__validacion-estado fas fa-times-circle"></i>
+            </div>
+            <p class="formulario__input-error">El correo solo puede contener
+              letras, numeros, puntos, guiones y guion bajo</p>
+          </div>
 
-        <div class="GrupoInput">
-          <label for="distrito">Distrito</label>
-          <select class="Input" name="id_distrito">
+          <div class="GrupoInput">
+            <label>Contraseña</label>
+            <button class="btn-cambiar-contra">Modificar Contraseña</button>
+          </div>
+
+          <h2>Dirección</h2>
+
+          <div class="GrupoInput">
+            <label for="distrito">Distrito</label>
+            <select select class="Input" name="id_distrito">
               {{#each distrito}}
-              <option value="{{id_distrito}}" {{selected id_distrito ../user.codigodistrito}}</option>
-                    {{des_distrito}}
-              </option>
+                <option
+                  value="{{id_distrito}}"
+                  {{selected id_distrito ../user.codigodistrito}}
+                >
+                  {{des_distrito}}
+                </option>
               {{/each}}
+            </select>
+          </div>
 
-              {{!-- <option>Hola</option>
-              <option selected="selected">Chao</option>
-              <option>Adios</option> --}}
-          </select>
+          <div id="grupo__direccion" class="GrupoInput">
+            <label for="direc">Dirección</label>
+            <div class="formulario__grupo-input">
+              <input
+                class="Input"
+                type="text"
+                id="direccion"
+                name="direccion"
+                placeholder="Ingrese su dirección"
+                value="{{user.direccion}}"
+              />
+              <i class="formulario__validacion-estado fas fa-times-circle"></i>
+            </div>
+            <p class="formulario__input-error">La dirección puede tener punto,
+              simbolo numeral, guion y guion bajo</p>
+          </div>
+
         </div>
-
-        <div class="GrupoInput">
-          <label for="direc">Dirección</label>
-          <input
-            class="Input"
-            type="text"
-            id="direccion"
-            name="direccion"
-            value="{{user.direccion}}"
-          />
-        </div>
-
+      </div>
+      <div class="GrupoBoton">
+        <button class="BotonConfirmar">Confirmar Edición</button>
       </div>
     </div>
-    <div class="GrupoBoton">
-      <button class="BotonConfirmar">Confirmar Edición</button>
-    </div>
+
   </form>
 </div>
 
-{{#if message}}
-<script>
-  document.getElementById("message").classList.add('mensaje-activar')
-  setTimeout(() => {
-  document.getElementById("message").classList.remove('mensaje-activar'); }, 5000);
-</script>
-{{/if}}
+{{! modal }}
+<div class="modal-contenedor">
+  <div class="modal modal-close">
+    <div class="cerrar">X</div>
+    <h2 style="text-align: center; margin-bottom:0.6rem">Editar Contraseña</h2>
+
+    {{!-- {{#if success}}
+      <div id="message" class="mensaje-exito-contra mensaje-activar">
+        {{success}}
+      </div>
+    {{/if}}
+    {{#if message}}
+      <div id="message" class="mensaje-error-contra mensaje-activar">
+        {{message}}
+      </div>
+    {{/if}} --}}
+
+    <form
+      action="/links/edituser/contra/{{user.dni}}"
+      method="POST"
+      class="form-contraseña"
+    >
+      <div class="GrupoInput">
+        <label for="contra-actual">Digite su actual contraseña</label>
+        <input
+          class="Input"
+          type="password"
+          id="contraActual"
+          name="contraActual"
+          style="width: 100%;margin-left: 0"
+        />
+      </div>
+      <div class="GrupoInput">
+        <label for="contra-nueva">Digite su nueva contraseña</label>
+        <input
+          class="Input"
+          type="password"
+          id="contraNueva"
+          name="contraNueva"
+          style="width: 100%;margin-left: 0"
+        />
+      </div>
+      <div class="GrupoInput">
+        <label for="contra-confirmar">Confirme su nueva contraseña</label>
+        <input
+          class="Input"
+          type="password"
+          id="contraConfirmar"
+          name="contraConfirmar"
+          style="width: 100%;margin-left: 0"
+        />
+      </div>
+      <button class="btn-nueva-contra">Cambiar Contraseña</button>
+    </form>
+  </div>
+</div>
+
+<script src="/js/modificar.js"></script>

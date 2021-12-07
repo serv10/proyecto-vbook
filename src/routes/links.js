@@ -3,6 +3,17 @@ const router = express.Router();
 const pool = require("../database");
 const { isLoggedIn } = require("../lib/auth");
 const helpers = require("../lib/helpers");
+const path = require("path");
+
+const expresiones = {
+  nombre: /^[a-zA-ZÀ-ÿ\s]{1,50}$/,
+  apellidos: /^[a-zA-ZÀ-ÿ\s]{0,50}$/,
+  password: /^.{4,10}$/,
+  correo: /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+  direccion: /^[a-zA-ZÀ-ÿ0-9.#-_\s]{0,100}$/,
+  celular: /^[0-9]{9}$/,
+  usuario: /^[a-zA-Z0-9-_]{4,12}$/,
+};
 
 router.get("/add", isLoggedIn, (req, res) => {
   res.render("links/add");
@@ -81,7 +92,7 @@ router.post("/editbook/:idLibro", isLoggedIn, async (req, res) => {
   res.redirect("/links/mislibros");
 });
 
-router.get("/edituser/:dni", isLoggedIn, async (req, res) => {
+router.get("/edituser/datos/:dni", isLoggedIn, async (req, res) => {
   const { dni } = req.params;
   const user = await pool.query("select*from persona where dni=?", [dni]);
   const distrito = await pool.query(
@@ -90,55 +101,120 @@ router.get("/edituser/:dni", isLoggedIn, async (req, res) => {
   res.render("links/modificarperfil", { edituser: user[0], distrito });
 });
 
-router.post("/edituser/:dni", isLoggedIn, async (req, res) => {
-  try {
-    const { dni } = req.params;
-    const {
-      nombre,
-      apellidoPaterno,
-      apellidoMaterno,
-      direccion,
-      telefono,
-      correo_electronico,
-      genero,
-      fecha_nac,
-      foto = "",
-      id_pais = 1,
-      id_region = 1,
-      id_distrito,
-    } = req.body;
+router.post("/edituser/datos/:dni", isLoggedIn, async (req, res) => {
+  const { dni } = req.params;
 
-    /* var { password = "123456" } = req.body;
-    password = await helpers.encryptPassword(password); */
+  const {
+    nombre,
+    apellidoPaterno,
+    apellidoMaterno,
+    direccion,
+    telefono,
+    correo_electronico,
+    genero,
+    fecha_nac,
+    usuario,
+    id_distrito,
+    wsp,
+    twt,
+    ig,
+    fb,
+    wtp,
+  } = req.body;
 
-    const actDatosUser = {
-      nombre,
-      apellidoPaterno,
-      apellidoMaterno,
-      direccion,
-      telefono,
-      correo_electronico,
-      genero,
-      fecha_nac,
-      foto,
-      id_pais,
-      id_region,
-      id_distrito,
-    };
+  let foto;
+  let subirDireccion;
 
-    /* console.log(actDatosUser);
-    console.log(dni); */
+  if (req.files && Object.keys(req.files).length != 0) {
+    foto = req.files.foto;
+    subirDireccion = path.join(__dirname, "../", "public", "upload", foto.name);
 
-    /* await pool.query("UPDATE persona SET nombre=? WHERE dni=?", [
-      nombre,
-      req.params.dni,
-    ]);
-    */
-    req.flash("message", "Datos actualizados satisfactoriamente");
-    res.redirect(dni);
-  } catch (e) {
-    console.log(e);
+    foto.mv(subirDireccion, async () => {
+      await pool.query("UPDATE persona SET foto=? WHERE dni=?", [
+        foto.name,
+        dni,
+      ]);
+    });
   }
+
+  if (
+    expresiones.nombre.test(nombre) &&
+    expresiones.nombre.test(apellidoPaterno) &&
+    expresiones.apellidos.test(apellidoMaterno) &&
+    expresiones.correo.test(correo_electronico) &&
+    expresiones.direccion.test(direccion) &&
+    (telefono.length == 0 || expresiones.celular.test(telefono)) &&
+    (usuario.length == 0 || expresiones.usuario.test(usuario))
+  ) {
+    await pool.query(
+      "update persona set nombre=?,apellidoPaterno=?,apellidoMaterno=?,direccion=?,telefono=?,correo_electronico=?,genero=?,usuario=?,fecha_nac=?,id_distrito=? where dni = ?",
+      [
+        nombre,
+        apellidoPaterno,
+        apellidoMaterno,
+        direccion,
+        telefono,
+        correo_electronico,
+        genero,
+        usuario,
+        fecha_nac,
+        id_distrito,
+        dni,
+      ]
+    );
+
+    await pool.query(
+      "update usuarioredsocial set link_wsp=?,link_fb=?,link_twt=?,link_ig=?,link_wtp=? where dni = ?",
+      [wsp, twt, ig, fb, wtp, dni]
+    );
+
+    req.flash("success", "Datos actualizados satisfactoriamente");
+  } else {
+    req.flash("message", "Error en algunos de los campos");
+  }
+
+  res.redirect(dni);
+});
+
+router.post("/edituser/contra/:dni", isLoggedIn, async (req, res) => {
+  const { dni } = req.params;
+  const { contraActual, contraNueva, contraConfirmar } = req.body;
+
+  const row = await pool.query("SELECT * FROM persona WHERE dni=?", [dni]);
+
+  const user = row[0];
+
+  const validarPassword = await helpers.comparaPassword(
+    contraActual,
+    user.password
+  );
+
+  if (validarPassword) {
+    if (expresiones.password.test(contraNueva)) {
+      if (contraNueva === contraConfirmar) {
+        /* const contraEncriptada = await helpers.encryptPassword(contraNueva);
+        await pool.query("UPDATE persona SET password=? WHERE dni=?", [
+          contraEncriptada,
+          dni,
+        ]);
+        console.log(contraEncriptada); */
+        req.flash("success", "Contraseña actualizada satisfactoriamente");
+        console.log("Exito");
+      } else {
+        req.flash("message", "Las contraseñas no son iguales");
+        console.log("Las contraseñas no son iguales");
+      }
+    } else {
+      req.flash("message", "Error en los campos");
+      console.log("Error en los campos");
+    }
+  } else {
+    req.flash("message", "La contraseña actual no coincide");
+    console.log("La contraseña actual no coincide");
+  }
+
+  res.redirect("back");
 });
 
 module.exports = router;
+module.exports = expresiones;
