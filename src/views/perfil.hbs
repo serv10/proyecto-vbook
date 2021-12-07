@@ -4,47 +4,32 @@
 <div class="DivCont">
   <div class="ContDatosIzq">
     <div class="DivImg">
-      <figure>
-        <img class="Img" src="/img/messi.jpg" alt="Foto Perfil" />
-      </figure>
+      {{#if user.foto}}
+        <img class="Img" src="/upload/{{user.foto}}" alt="Foto Perfil" />
+      {{else}}
+        <img class="Img" src="/img/default.jpg" alt="Foto Perfil" />
+      {{/if}}
     </div>
 
     <div class="GrupoContacto">
-      <h2>Contactos</h2>
+      <h2 style="margin-top: 1.5rem;">Contactos</h2>
 
       <div class="Contactos">
         <figure>
           <img class="Img" src="/img/wsp.png" alt="WhatsApp" />
         </figure>
-        <input class="Enlaces" type="url" placeholder="link de WhatsApp" />
-      </div>
-
-      <div class="Contactos">
         <figure>
           <img class="Img" src="/img/twitter.jpg" alt="Twitter" />
         </figure>
-        <input class="Enlaces" type="url" placeholder="link de Twitter" />
-      </div>
-
-      <div class="Contactos">
         <figure>
           <img class="Img" src="/img/instagram.png" alt="Instagram" />
         </figure>
-        <input class="Enlaces" type="url" placeholder="link de Instagram" />
-      </div>
-
-      <div class="Contactos">
         <figure>
           <img class="Img" src="/img/fb.png" alt="Facebook" />
         </figure>
-        <input class="Enlaces" type="url" placeholder="link de Facebook" />
-      </div>
-
-      <div class="Contactos">
         <figure>
           <img class="Img" src="/img/watt.png" alt="Wattpad" />
         </figure>
-        <input class="Enlaces" type="url" placeholder="link de Wattpad" />
       </div>
     </div>
 
@@ -109,32 +94,71 @@
 
         <div class="GrupoInput">
           <label for="nombres">Nombres</label>
-          <input class="Input" type="text" id="nombres" value="{{user.nombre}}" readonly/>
+          <input
+            class="Input"
+            type="text"
+            id="nombres"
+            value="{{user.nombre}}"
+            readonly
+          />
         </div>
 
         <div class="GrupoInput">
           <label for="apellidoP">Apellido Paterno</label>
-          <input class="Input" type="text" id="apellidoP" value="{{user.apellidoPaterno}}" readonly/>
+          <input
+            class="Input"
+            type="text"
+            id="apellidoP"
+            value="{{user.apellidoPaterno}}"
+            readonly
+          />
         </div>
 
         <div class="GrupoInput">
           <label for="apellidoM">Apellido Materno</label>
-          <input class="Input" type="text" id="apellidoM" value="{{user.apellidoMaterno}}" readonly/>
+          <input
+            class="Input"
+            type="text"
+            id="apellidoM"
+            value="{{user.apellidoMaterno}}"
+            placeholder="No ingresó su apellido materno"
+            readonly
+          />
         </div>
 
         <div class="GrupoInput">
           <label for="celular">Número Celular</label>
-          <input class="Input" type="tel" id="celular" value="{{user.telefono}}" readonly/>
+          <input
+            class="Input"
+            type="tel"
+            id="celular"
+            placeholder="No ingresó su número telefónico"
+            value="{{user.telefono}}"
+            readonly
+          />
         </div>
 
         <div class="GrupoInput">
           <label for="genero">Género</label>
-          <input class="Input" type="text" id="genero" value="{{user.genero}}" readonly/>
+          <input
+            class="Input"
+            type="text"
+            id="genero"
+            placeholder="No ingresó su género"
+            value="{{user.genero}}"
+            readonly
+          />
         </div>
 
         <div class="GrupoInput">
           <label for="nacimiento">Fecha de Nacimiento</label>
-          <input class="Input" type="date" id="nacimiento" value="{{user.fecha}}" readonly/>
+          <input
+            class="Input"
+            type="date"
+            id="nacimiento"
+            value="{{user.fecha}}"
+            readonly
+          />
         </div>
       </div>
 
@@ -143,35 +167,53 @@
 
         <div class="GrupoInput">
           <label for="usuario">Usuario</label>
-          <input class="Input" type="text" id="usuario" value="{{user.nombre}} {{user.apellidoPaterno}} {{user.apellidoMaterno}}" placeholder="" readonly/>
+          <input
+            class="Input"
+            type="text"
+            id="usuario"
+            value="{{user.usuario}}"
+            placeholder="No ingresó su usuario"
+            readonly
+          />
         </div>
 
         <div class="GrupoInput">
           <label for="correo">Correo</label>
-          <input class="Input" type="email" id="correo" value="{{user.correo_electronico}}" placeholder="" readonly/>
-        </div>
-
-        <div class="GrupoInput">
-          <label for="contra">Contraseña</label>
-          <input class="Input" type="password" id="contra" placeholder="" readonly/>
+          <input
+            class="Input"
+            type="email"
+            id="correo"
+            value="{{user.correo_electronico}}"
+            readonly
+          />
         </div>
 
         <h2>Dirección</h2>
 
         <div class="GrupoInput">
           <label for="distrito">Distrito</label>
-          <input class="Input" type="text" id="distrito" value="{{user.distrito}}" readonly/>
+          <input
+            class="Input"
+            type="text"
+            id="distrito"
+            value="{{user.distrito}}"
+            readonly
+          />
         </div>
 
         <div class="GrupoInput">
           <label for="direc">Dirección</label>
-          <input class="Input" type="text" id="direc" value="{{user.direccion}}" readonly/>
+          <input
+            class="Input"
+            type="text"
+            id="direc"
+            value="{{user.direccion}}"
+            placeholder="No ingresó su dirección"
+            readonly
+          />
         </div>
 
       </div>
-    </div>
-    <div class="BotonModificar">
-      <a href="/links/edituser/{{user.dni}}">Modificar Datos</a>
     </div>
   </div>
 </div>

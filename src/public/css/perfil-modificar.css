@@ -3,7 +3,6 @@
   width: 90%;
   display: flex;
   margin: auto;
-  height: 1350px;
 }
 
 .ContDatosIzq {
@@ -53,13 +52,27 @@
 }
 
 .Contactos {
-  display: flex;
-  flex-direction: column;
-  margin-top: 15px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  width: 50%;
+  margin: auto;
+}
+
+.Contactos figure:nth-child(1) {
+  grid-column: span 2;
 }
 
 .Contactos figure {
-  width: 22%;
+  cursor: pointer;
+}
+
+.contacto {
+  margin-bottom: 1.5rem;
+}
+
+.contacto figure {
+  width: 30%;
   margin: 0 auto;
 }
 

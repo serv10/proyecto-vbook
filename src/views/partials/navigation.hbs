@@ -25,10 +25,10 @@
           class="nav-sup__sub-menu-active nav-sup__sub-menu-disactive"
         >
           <li>
-            <a href="/perfil">Ir a mi perfil</a>
+            <a href="/perfil">Mi perfil</a>
           </li>
           <li>
-            <a href="/links/edituser/datos/{{user.dni}}">Editar Perfil</a>
+            <a href="/links/mislibros">Mis libros</a>
           </li>
           <li>
             <a href="/logout">Cerrar Sesión</a>
@@ -39,7 +39,7 @@
 
     <div class="nav-sup__grupo-registrar">
       {{#if user}}
-        <a href="/links/add">PUBLICA UN LIBRO</a>
+        <a href="/links/publicar">PUBLICA UN LIBRO</a>
       {{else}}
         <a href="/login">INICIAR SESIÓN</a>
       {{/if}}
@@ -59,21 +59,9 @@
           <i class="fas fa-angle-right"></i>
         </a>
         <ul class="nav-inf__sublistas">
-          <li>
-            <a href="#">Épico</a>
-          </li>
-          <li>
-            <a href="#">Lírico</a>
-          </li>
-          <li>
-            <a href="#">Dramático</a>
-          </li>
-          <li>
-            <a href="#">Narrativo</a>
-          </li>
-          <li>
-            <a href="#">Expositivo</a>
-          </li>
+          {{#each genero}}
+            <li><a href="">{{nombre}}</a></li>
+          {{/each}}
         </ul>
       </li>
       <li class="nav-inf__lista">

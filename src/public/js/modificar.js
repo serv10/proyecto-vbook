@@ -5,6 +5,7 @@ let modalC = document.querySelectorAll(".modal-contenedor")[0];
 let mensaje = document.getElementById("message");
 const formulario = document.getElementById("form-modificar");
 const inputs = document.querySelectorAll("#form-modificar input");
+let radios = document.querySelectorAll("[type='radio']");
 
 const expresiones = {
   nombre: /^[a-zA-ZÀ-ÿ\s]{1,50}$/,
@@ -172,8 +173,24 @@ window.addEventListener("click", (e) => {
     }, 500);
   }
 });
+
 if (mensaje != null) {
   setTimeout(() => {
     mensaje.classList.toggle("mensaje-activar");
   }, 5000);
 }
+
+radios.forEach((x) => {
+  x.dataset.val = x.checked;
+
+  x.addEventListener("click", (e) => {
+    let element = e.target;
+
+    if (element.dataset.val == "false") {
+      element.dataset.val = "true";
+    } else {
+      element.dataset.val = "false";
+      element.checked = false;
+    }
+  });
+});
