@@ -12,8 +12,6 @@ const expresiones = {
   dni: /^[0-9]{8}$/, // 8 digitos.
 };
 
-module.exports = new expresiones();
-
 handlebars.registerHelper("checked", function (value, currentValue) {
   if (value == currentValue) {
     return "checked";
@@ -144,3 +142,4 @@ passport.deserializeUser(async (dni, done) => {
   );
   done(null, fila[0]);
 });
+
