@@ -51,6 +51,7 @@ app.use((req, res, next) => {
   app.locals.message = req.flash("message");
   app.locals.success = req.flash("success");
   app.locals.user = req.user;
+  app.locals.genero = req.genero;
   next();
 });
 
@@ -60,21 +61,10 @@ app.use(require("./routes/authentication"));
 app.use("/links", require("./routes/links"));
 
 //archivos publicos
+app.use(express.static(path.join(__dirname, "files")));
 app.use(express.static(path.join(__dirname, "public")));
 
 //inicialización del server
 app.listen(app.get("port"), () => {
   console.log("Servidor en puerto", app.get("port"));
-});
-
-app.get("/ayuda", (req, res) => {
-  res.render("ayuda");
-});
-
-app.get("/denunciar", (req, res) => {
-  res.render("denunciar");
-});
-
-app.get("/publicar", (req, res) => {
-  res.render("publicar");
 });

@@ -15,8 +15,8 @@ const expresiones = {
   usuario: /^[a-zA-Z0-9-_]{4,12}$/,
 };
 
-router.get("/add", isLoggedIn, (req, res) => {
-  res.render("links/add");
+router.get("/publicar", isLoggedIn, (req, res) => {
+  res.render("links/publicar");
 });
 
 router.post("/add", isLoggedIn, async (req, res) => {

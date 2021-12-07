@@ -1,9 +1,7 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
-
 const pool = require("../database");
 const helpers = require("../lib/helpers");
-const handlebars = require("handlebars");
 
 const expresiones = {
   nombre: /^[a-zA-ZÀ-ÿ\s]{1,50}$/, // Letras y espacios, pueden llevar acentos.
@@ -11,14 +9,6 @@ const expresiones = {
   correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
   dni: /^[0-9]{8}$/, // 8 digitos.
 };
-
-handlebars.registerHelper("checked", function (value, currentValue) {
-  if (value == currentValue) {
-    return "checked";
-  } else {
-    return "";
-  }
-});
 
 passport.use(
   "local.login",
@@ -135,7 +125,6 @@ passport.serializeUser((usuario, done) => {
 });
 
 passport.deserializeUser(async (dni, done) => {
-  /*const fila = await pool.query("SELECT * FROM PERSONA WHERE DNI=?", [dni]);*/
   const fila = await pool.query(
     "SELECT p.dni, p.nombre, p.apellidoPaterno, p.apellidoMaterno, p.direccion, p.telefono, p.correo_electronico, p.password, p.genero, p.foto,p.usuario, DATE_format(p.fecha_nac, '%Y-%m-%d') as fecha, pa.des_pais, r.des_region, d.id_distrito as codigodistrito, d.des_distrito as distrito, rs.link_wsp as wsp,rs.link_fb as fb,rs.link_twt as twt,rs.link_ig as ig,rs.link_wtp as wtp FROM persona p INNER JOIN pais pa ON p.id_pais = pa.id_pais INNER JOIN region r ON p.id_region = r.id_region INNER JOIN distrito d ON p.id_distrito = d.id_distrito INNER JOIN UsuarioRedSocial rs ON p.dni = rs.dni WHERE p.dni = ?",
     [dni]

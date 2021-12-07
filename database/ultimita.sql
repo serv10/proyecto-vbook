@@ -197,6 +197,14 @@ values (
 	1005
 );
 
+select  
+	e.nombre,
+    g.nombre
+from especie e
+inner join genero g
+	on e.idGenero = g.idGenero
+where e.idGenero = 1;
+
 SELECT 
 	p.dni, 
 	p.nombre, 
@@ -228,6 +236,8 @@ INNER JOIN distrito d
 INNER JOIN UsuarioRedSocial rs 
 	ON p.dni = rs.dni
 WHERE p.dni = 71696805;
+
+update persona set genero=null where dni=71696805;
 
 select 
 	p.dni, 
