@@ -59,6 +59,7 @@ passport.use(
         nombre,
         apellidoPaterno,
         password2,
+        //fecha_nac =  '0000-00-00 00:00:00',
         id_pais = 1,
         id_region = 1,
         id_distrito = 1043,
@@ -70,6 +71,7 @@ passport.use(
         apellidoPaterno,
         correo_electronico,
         password,
+        //fecha_nac,
         id_pais,
         id_region,
         id_distrito,
@@ -126,8 +128,7 @@ passport.serializeUser((usuario, done) => {
 
 passport.deserializeUser(async (dni, done) => {
   const fila = await pool.query(
-    "SELECT p.dni, p.nombre, p.apellidoPaterno, p.apellidoMaterno, p.direccion, p.telefono, p.correo_electronico, p.password, p.genero, p.foto,p.usuario, DATE_format(p.fecha_nac, '%Y-%m-%d') as fecha, pa.des_pais, r.des_region, d.id_distrito as codigodistrito, d.des_distrito as distrito, rs.link_wsp as wsp,rs.link_fb as fb,rs.link_twt as twt,rs.link_ig as ig,rs.link_wtp as wtp FROM persona p INNER JOIN pais pa ON p.id_pais = pa.id_pais INNER JOIN region r ON p.id_region = r.id_region INNER JOIN distrito d ON p.id_distrito = d.id_distrito INNER JOIN UsuarioRedSocial rs ON p.dni = rs.dni WHERE p.dni = ?",
-    [dni]
+    "SELECT p.dni, p.nombre, p.apellidoPaterno, p.apellidoMaterno, p.direccion, p.telefono, p.correo_electronico, p.password, case when p.genero = 'M' then 'Masculino' when p.genero = 'F' then 'Femenino' when p.genero = 'O' then 'Otro' end as genero, p.foto,p.usuario, DATE_format(p.fecha_nac, '%Y-%m-%d') as fecha, pa.des_pais, r.des_region, d.id_distrito as codigodistrito, d.des_distrito as distrito, rs.link_wsp as wsp,rs.link_fb as fb,rs.link_twt as twt,rs.link_ig as ig,rs.link_wtp as wtp FROM persona p INNER JOIN pais pa ON p.id_pais = pa.id_pais INNER JOIN region r ON p.id_region = r.id_region INNER JOIN distrito d ON p.id_distrito = d.id_distrito INNER JOIN UsuarioRedSocial rs ON p.dni = rs.dni WHERE p.dni = ?", [dni]
   );
   done(null, fila[0]);
 });

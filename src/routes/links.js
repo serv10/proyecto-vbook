@@ -4,6 +4,7 @@ const pool = require("../database");
 const { isLoggedIn } = require("../lib/auth");
 const helpers = require("../lib/helpers");
 const path = require("path");
+const { Console } = require("console");
 
 const expresiones = {
   nombre: /^[a-zA-ZÀ-ÿ\s]{1,50}$/,
@@ -19,12 +20,13 @@ router.get("/publicar", isLoggedIn, (req, res) => {
   res.render("links/publicar");
 });
 
-router.post("/add", isLoggedIn, async (req, res) => {
+router.post("/publicar", isLoggedIn, async (req, res) => {
+  console.log('gaaa');
   const {
     titulo,
-    fechasubida = "1993-09-11",
+    fechasubida,
     descripcion,
-    stock,
+    stock = 1,
     precio,
     autor,
     estado = 1,

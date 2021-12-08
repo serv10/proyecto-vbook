@@ -1,11 +1,13 @@
 <link rel="stylesheet" href="/css/publicar.css" />
 
 {{> barra}}
+
 <main class="index" style="width:100%">
   <div class="container" style="margin-top: 50px;">
     <div class="row">
       <div class="col-sm-12">
-        <div class="box-shadow-full" style="padding-top: 3rem;">
+        <form action="/links/publicar" method="post">
+        <div class="box-shadow-full" style="padding-top: 3rem;">            
           <div class="row" style="margin-bottom: 25px;">
             <div class="col-6 col-md-4">
               <h2 style="margin-bottom: 25px;">
@@ -171,14 +173,14 @@
             </div>
           </div>
           <div class="text-center" style="margin-top: 25px;">
-            <button
-              type="button"
-              class="btn btn-primary"
-              style="font-size: 17px;font-weight: 900;"
-            >PUBLICAR LIBRO</button>
+              <button type="button" class="btn btn-primary" style="font-size: 17px;font-weight: 900;">
+                PUBLICAR LIBRO
+              </button>
+          </form>
           </div>
         </div>
       </div>
     </div>
   </div>
 </main>
+</form>
