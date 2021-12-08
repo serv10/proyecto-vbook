@@ -56,15 +56,6 @@ idGenero int not null auto_increment ,
 nombre varchar(50) not null,
 primary key (idGenero));
 
-/*create table autor(
-idAutor int not null,
-nombre varchar(50) not null,
-apellidoPaterno varchar(50) not null,
-apellidoMaterno varchar(50) not null,
-idLibro int not null,
-primary key auto_increment (idAutor),
-foreign key (idLibro) references libro(idLibro));*/
-
 create table especie(
 idEspecie int not null auto_increment ,
 nombre varchar(50) not null,
@@ -121,15 +112,6 @@ primary key (idComentario),
 foreign key (dni) references persona(dni),
 foreign key (idLibro) references libro(idLibro));
 
-/*
-create table editorial(
-idEditorial int not null,
-nombre varchar(50) not null,
-idLibro int not null,
-primary key auto_increment (idEditorial),
-foreign key (idLibro) references libro(idLibro));
-*/
-
 create table LibroPublicacion(
 idLibroPublicacion int not null auto_increment,
 idLibro int not null,
@@ -147,15 +129,13 @@ foreign key (idLibroPublicacion) references LibroPublicacion(idLibroPublicacion)
 
 create table denuncia(
 idDenuncia int not null auto_increment,
-descripcion int not null,
+descripcion varchar(500) not null,
+archivo varchar(200),
 estado bool not null,
-idLibro int not null,
 dni char(8) not null,
 primary key (idDenuncia),
-foreign key (idLibro) references libro(idLibro),
 foreign key (dni) references persona(dni));
 
--- CREATE TABLE IMAGENLIBRO, REDESSOCIALES, AYUDA
 create table UsuarioRedSocial(
 dni char(8) not null,
 link_wsp varchar(200),
