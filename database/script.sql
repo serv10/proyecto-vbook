@@ -26,14 +26,15 @@ create table persona(
 dni char(8) not null,
 nombre varchar(50) not null,
 apellidoPaterno varchar(50) not null,
-apellidoMaterno varchar(50) not null,
+apellidoMaterno varchar(50),
 direccion varchar(100),
 telefono char(9),
 correo_electronico varchar(100) not null,
-password varchar(18) not null,
+password varchar(100) not null,
 genero char(1),
 fecha_nac date,
 foto varchar(200),
+usuario varchar (50),
 id_pais int not null,
 id_region int not null,
 id_distrito int not null,
@@ -54,15 +55,6 @@ create table genero(
 idGenero int not null auto_increment ,
 nombre varchar(50) not null,
 primary key (idGenero));
-
-/*create table autor(
-idAutor int not null,
-nombre varchar(50) not null,
-apellidoPaterno varchar(50) not null,
-apellidoMaterno varchar(50) not null,
-idLibro int not null,
-primary key auto_increment (idAutor),
-foreign key (idLibro) references libro(idLibro));*/
 
 create table especie(
 idEspecie int not null auto_increment ,
@@ -120,15 +112,6 @@ primary key (idComentario),
 foreign key (dni) references persona(dni),
 foreign key (idLibro) references libro(idLibro));
 
-/*
-create table editorial(
-idEditorial int not null,
-nombre varchar(50) not null,
-idLibro int not null,
-primary key auto_increment (idEditorial),
-foreign key (idLibro) references libro(idLibro));
-*/
-
 create table LibroPublicacion(
 idLibroPublicacion int not null auto_increment,
 idLibro int not null,
@@ -146,12 +129,11 @@ foreign key (idLibroPublicacion) references LibroPublicacion(idLibroPublicacion)
 
 create table denuncia(
 idDenuncia int not null auto_increment,
-descripcion int not null,
+descripcion varchar(500) not null,
+archivo varchar(200),
 estado bool not null,
-idLibro int not null,
 dni char(8) not null,
 primary key (idDenuncia),
-foreign key (idLibro) references libro(idLibro),
 foreign key (dni) references persona(dni));
 
 create table UsuarioRedSocial(
@@ -169,139 +151,10 @@ imagen blob not null,
 foreign key (idLibro) references Libro(idLibro));
 
 create table Ayuda(
-idAyuda int not null,
+idAyuda int not null auto_increment,
+titulo varchar (50) not null,
+correo_electronico varchar(100) not null,
 mensaje varchar (500) not null,
 dni char(8) not null,
+primary key (idAyuda),
 foreign key (dni) references persona(dni));
-
-insert into persona (
-	dni,
-	nombre,
-	apellidoPaterno,
-	apellidoMaterno,
-	correo_electronico,
-	password,
-	id_pais,
-	id_region,
-	id_distrito
-) 
-values (
-	"71696804", 
-	"Sebastian", 
-	"Villanueva",
-	"Ramos",
-	"sebas.ramos@gmail.com",
-	"contra123",
-	1,
-	1,
-	1005
-);
-
-select  
-	e.nombre,
-    g.nombre
-from especie e
-inner join genero g
-	on e.idGenero = g.idGenero
-where e.idGenero = 1;
-
-SELECT 
-	p.dni, 
-	p.nombre, 
-	p.apellidoPaterno, 
-	p.apellidoMaterno, 
-	p.direccion, 
-	p.telefono, 
-	p.correo_electronico, 
-	p.password, 
-	p.genero, 
-    p.usuario,
-	DATE_format(p.fecha_nac, '%Y-%m-%d') as fecha, 
-	pa.des_pais, 
-	r.des_region, 
-	d.id_distrito as codigodistrito, 
-	d.des_distrito as distrito,
-    rs.link_wsp as wsp,
-	rs.link_fb as fb,
-	rs.link_twt as twt,
-	rs.link_ig as ig,
-	rs.link_wtp as wtp
-FROM persona p 
-INNER JOIN pais pa 
-	ON p.id_pais = pa.id_pais 
-INNER JOIN region r 
-	ON p.id_region = r.id_region 
-INNER JOIN distrito d 
-	ON p.id_distrito = d.id_distrito 
-INNER JOIN UsuarioRedSocial rs 
-	ON p.dni = rs.dni
-WHERE p.dni = 71696805;
-
-update persona set genero=null where dni=71696805;
-
-select 
-	p.dni, 
-	p.nombre, 
-	p.apellidoPaterno, 
-	p.apellidoMaterno, 
-	p.direccion, p.telefono, 
-	p.correo_electronico, 
-	p.password, 
-	p.genero, 
-    p.foto,
-    p.usuario,
-	DATE_format(p.fecha_nac, '%Y-%m-%d') as fecha, 
-	pa.des_pais as pais, 
-	r.des_region, 
-	d.id_distrito, 
-	d.des_distrito,
-    rs.link_wsp,
-	rs.link_fb,
-	rs.link_twt,
-	rs.link_ig,
-	rs.link_wtp
-from persona p 
-inner join pais pa 
-	on p.id_pais = pa.id_pais 
-inner join region r 
-	on p.id_region = r.id_region 
-inner join distrito d 
-	on p.id_distrito = d.id_distrito 
-INNER JOIN UsuarioRedSocial rs 
-	ON p.dni = rs.dni
-where correo_electronico="sebas_ramos_18@hotmail.com";
-
-select *  from UsuarioRedSocial where dni = 71696805;
-
-insert into UsuarioRedSocial (dni) values (71696805);
-use vbook;
-update persona set foto=null where dni = 71696805;
-select*from persona;
-
-/*update persona set
-	nombre=?,
-    apellidoPaterno=?,
-    apellidoMaterno=?,
-    direccion=?,
-    telefono=?,
-    correo_electronico=?,
-    genero=?,
-    usuario=?,
-    fecha_nac=?,
-    id_distrito=?
-where 
-	dni = ?;
-*/   
-select* from usuarioredsocial;
-
-/*update usuarioredsocial set
-	link_wsp=?,
-    link_fb=?,
-    link_twt=?,
-    link_ig=?,
-    link_wtp=?
-where 
-	dni = ?;
-    */
-    
-    
