@@ -60,9 +60,9 @@ passport.use(
         apellidoPaterno,
         password2,
         //fecha_nac =  '0000-00-00 00:00:00',
-        id_pais = 1,
-        id_region = 1,
-        id_distrito = 1043,
+        id_pais = 4,
+        id_region = 24,
+        id_distrito = 999,
       } = req.body;
 
       const nuevoUsuario = {
