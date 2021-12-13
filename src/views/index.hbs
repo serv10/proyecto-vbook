@@ -2,7 +2,28 @@
 
 {{> navigation}}
 <main class="index" style="width:100%">
-
+<div>
+    <section aria-label="fotos">
+      <div class="carousel" data-carousel>
+        <button class="carousel-button prev" data-carousel-button="prev">&#8656;</button>
+        <button class="carousel-button next" data-carousel-button="next">&#8658;</button>
+        <ul data-slides>
+          <li class="slide" data-active>
+            <img src="/img/l1.jpg" alt="Imagen1">
+          </li>
+          <li class="slide">
+            <img src="/img/l2.jpg" alt="Imagen2">
+          </li>
+          <li class="slide">
+            <img src="/img/l3.jpg" alt="Imagen3">
+          </li>
+          <li class="slide">
+            <img src="/img/l4.png" alt="Imagen4">
+          </li>
+        </ul>
+      </div>
+    </section>
+  </div>
   <div
     style="display: flex; align-items: center; gap: 30px; width:100%; padding-left: 5rem; margin: 1rem 0"
   >
@@ -20,3 +41,5 @@
     </figure>
   </div>
 </main>
+
+<script src="/js/carousel.js"></script>
