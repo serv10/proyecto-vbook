@@ -1,11 +1,16 @@
-module.exports = {
+/*module.exports = {
    database: {
       host: 'us-cdbr-east-05.cleardb.net',
       user: 'b7fd6191524734',
       password: '9992cba2',
       database: 'heroku_a2fd79052888e7b',
    },
+};*/
+module.exports = {
+   database: {
+      host: '127.0.0.1',
+      user: 'root',
+      password: 'root',
+      database: 'lawebada',
+   },
 };
-
-//cambios
-//mysql://b7fd6191524734:9992cba2@us-cdbr-east-05.cleardb.net/heroku_a2fd79052888e7b?reconnect=true
